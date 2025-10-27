@@ -8,24 +8,7 @@
 </p-drawer>
 
 <!-- Topbar -->
-<div class="topbar">
-	<div class="topbar-left">
-<div class="sidebar-logo">
-		<img src="/assets/image.png" alt="SourceView Logo" style="height:32px; margin-bottom:24px;" />
-	</div>		<span class="customer-label">Customer Name</span>
-		<span class="customer-value">Ardent Health - Sports Medicine</span>
-	</div>
-	<div class="topbar-center">
-		<span class="facility-label">Facility</span>
-		<p-select [options]="facilities" [(ngModel)]="selectedFacility" styleClass="facility-dropdown"></p-select>
-		<span class="view-label">Selected View:</span>
-		<p-select [options]="views" [(ngModel)]="selectedView" styleClass="view-dropdown"></p-select>
-	</div>
-	<div class="topbar-right">
-		<button pButton pRipple icon="pi pi-question-circle" class="p-button-text p-button-rounded"></button>
-		<p-avatar label="AB" styleClass="topbar-avatar"></p-avatar>
-	</div>
-</div>
+
 
 <!-- Breadcrumb -->
 
@@ -42,16 +25,29 @@
 
 <!-- Topbar -->
 <div class="topbar">
+	<div class="sidebar-logo">
+		<img src="assets/image.png" alt="Logo" class="logo-image" height="50" width="180"/>
+	</div>
 	<div class="topbar-left">
 		<span class="customer-label">Customer Name</span>
 		<span class="customer-value">Ardent Health - Sports Medicine</span>
 	</div>
-	<div class="topbar-center">
-		<span class="facility-label">Facility</span>
-		<p-select class="facility-dropdown" [options]="facilities" [(ngModel)]="selectedFacility"></p-select>
-		<span class="view-label">Selected View:</span>
-		<p-select class="view-dropdown" [options]="views" [(ngModel)]="selectedView"></p-select>
+	<div class="topbar-center1" style="display:flex; flex-direction:column; align-items:flex-start; gap:2px; min-width:100px; max-width:140px; width:100%;">
+	<span class="facility-label">Facility</span>
+		<mat-form-field appearance="fill" class="facility-dropdown" style="font-size:0.9rem; width:100%; margin-bottom:0;">
+			<mat-select [formControl]="toppings" multiple style="font-size:0.9rem; min-height:28px;">
+				<mat-option *ngFor="let facility of facilities" [value]="facility.value">{{facility.label}}</mat-option>
+			</mat-select>
+		</mat-form-field>
 	</div>
+	<div class="topbar-center2" style="display:flex; flex-direction:column; align-items:flex-start; gap:2px; min-width:90px; max-width:120px; width:100%;">
+	<span class="view-label">Selected View:</span>		<mat-form-field appearance="fill" class="view-dropdown" style="font-size:0.9rem; width:100%; margin-bottom:0;">
+			<mat-select [(ngModel)]="selectedView" name="view" style="font-size:0.9rem; min-height:28px;">
+				<mat-option *ngFor="let view of views" [value]="view.value">{{view.label}}</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</div>
+	
 	<div class="topbar-right">
 		<button pButton icon="pi pi-question-circle" class="p-button-text p-button-rounded" style="font-size:1.3rem;"></button>
 		<div class="topbar-avatar p-d-flex p-ai-center p-jc-center" style="width:40px; height:40px; border-radius:50%; font-family:'Inter',sans-serif;">AB</div>
@@ -170,8 +166,8 @@
 	<div class="card-subtitle" style="font-size:0.9rem; color:#555; margin-bottom:10px;">Description of data table below. Review instrument quantity and price per case for each manufacturer. Colored dots indicate if values are above target thresholds.</div>
 	<div style="display:flex; align-items:end; margin-bottom:8px;justify-content: flex-end;">
 		<span style="font-size:0.9rem; margin-right:16px;">Target Threshold:</span>
-		<span style="display:inline-flex; align-items:center; margin-right:12px;font-size: 0.9rem;"><span style="width:14px; height:14px; background:#FFC107; border-radius:50%; display:inline-block; margin-right:4px;"></span>5-10% above target</span>
-		<span style="display:inline-flex; align-items:center; margin-right:12px;font-size: 0.9rem;"><span style="width:14px; height:14px; background:#B71C1C; border-radius:50%; display:inline-block; margin-right:4px;"></span>> 10% above target</span>
+		<span style="display:inline-flex; align-items:center; margin-right:12px;font-size: 0.9rem;"><span style="width:14px; height:14px; background:#FFC107;  display:inline-block; margin-right:4px;"></span>5-10% above target</span>
+		<span style="display:inline-flex; align-items:center; margin-right:12px;font-size: 0.9rem;"><span style="width:14px; height:14px; background:#B71C1C;  display:inline-block; margin-right:4px;"></span>> 10% above target</span>
 	</div>
 	<p-table [value]="manufacturerTableData" class="vendor-table" style="font-size:0.9rem;border: 0.5px solid rgb(221, 216, 216);" [rowExpandMode]="'single'">
 		<ng-template pTemplate="header">
@@ -218,29 +214,22 @@
 					<span>{{rowData.total}}</span>
 				</td>
 			</tr>
-			<tr *ngIf="rowData.expanded">
-				<td colspan="8" style="background:#f5f7fa; padding:16px;">
-					<!-- <div style="font-size:0.95rem; color:#333; font-weight:500; margin-bottom:8px;">Details for {{rowData.instrument}}</div> -->
-					<table style="width:100%; font-size:0.92rem;">
-						<tr style="background:#e9ecef;">
-							<th style="padding:6px 12px; text-align:left;">Metric</th>
-							<th style="padding:6px 12px; text-align:left;">Value</th>
-						</tr>
-						<tr>
-							<td style="padding:6px 12px;">Sample Metric 1</td>
-							<td style="padding:6px 12px;">123</td>
-						</tr>
-						<tr>
-							<td style="padding:6px 12px;">Sample Metric 2</td>
-							<td style="padding:6px 12px;">ABC</td>
-						</tr>
-						<tr>
-							<td style="padding:6px 12px;">Sample Metric 3</td>
-							<td style="padding:6px 12px;">Demo Value</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
+			   <tr *ngIf="rowData.expanded" class="expanded-row">
+				   <td class="expanded-cell" colspan="8">
+					   <table class="expanded-metric-table" style="width:100%;">
+						   <tr style="background:#e9ecef;">
+							   <th *ngFor="let col of expandedInstrumentColumns" style="padding:6px 12px; text-align:left;">{{col}}</th>
+						   </tr>
+						   <tr *ngFor="let row of getExpandedInstrumentRows(rowData.instrument)">
+							   <td class="expanded-instrument-name"><i>{{row.label}}</i></td>
+							   <td *ngFor="let val of row.values">{{val}}</td>
+						   </tr>
+						   <tr style="font-weight:bold; border-top:2px solid #ccc;">
+							   <td *ngFor="let val of getExpandedInstrumentTotal(rowData.instrument)" style="padding:6px 12px;">{{val}}</td>
+						   </tr>
+					   </table>
+				   </td>
+			   </tr>
 		</ng-template>
 	</p-table>
 </p-card>

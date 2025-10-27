@@ -1,3 +1,36 @@
+/* Expanded row styling for instrument table */
+.vendor-table tr.expanded-row {
+	background: #f5f7fa;
+}
+.vendor-table td.expanded-cell {
+	padding: 18px 24px 12px 32px;
+	background: #f5f7fa;
+}
+.vendor-table .expanded-instrument-name {
+	font-style: italic;
+	font-size: 1rem;
+	color: #222;
+	margin-bottom: 6px;
+}
+.vendor-table .expanded-metric-table {
+	width: 100%;
+	font-size: 0.92rem;
+	border-collapse: collapse;
+}
+.vendor-table .expanded-metric-table th {
+	background: #e9ecef;
+	padding: 6px 12px;
+	text-align: left;
+	font-weight: 600;
+	color: #1a2a3a;
+}
+.vendor-table .expanded-metric-table td {
+	padding: 6px 12px;
+	color: #333;
+}
+:host ::ng-deep .mat-mdc-select-value-text {
+	font-size: 0.8rem;
+}
 // Custom PrimeNG tooltip style
 :host ::ng-deep pTooltip .p-tooltip-text {
 	background: #f0f2f5 !important;
@@ -154,7 +187,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 0 32px;
+	padding: 0 12px;
 	font-size: 1rem;
 	z-index: 1000;
 	.topbar-left, .topbar-center, .topbar-right {
@@ -162,6 +195,9 @@
 		align-items: center;
 	}
 	.topbar-left {
+		display: flex;
+		flex-direction: column;
+		align-items: start;
 		gap: 8px;
 		img {
 			height: 32px;
@@ -170,40 +206,51 @@
 		}
 		.customer-label {
 			color: #888;
-			font-size: 0.95rem;
+			font-size: 0.9rem;
 			margin-right: 2px;
 		}
 		.customer-value {
 			font-weight: 500;
-			font-size: 1.05rem;
+			font-size: 1rem;
 		}
 	}
-	.topbar-center {
-		gap: 12px;
+	.topbar-center1, .topbar-center2 {
+	display: flex;
+		flex-direction: column;
+		align-items: start;
+		
+		gap: 8px;
+		
 		margin-left: 40px;
 		.facility-label, .view-label {
 			color: #888;
-			font-size: 0.95rem;
+			font-size: 0.9rem;
 		}
+		
 		.facility-dropdown, .view-dropdown {
-			min-width: 180px;
-			font-size: 1rem;
+			min-width: 164px;
+			// font-size: 0.9rem;
+			// height: 50px;
 		}
 	}
 	.topbar-right {
 		gap: 16px;
 		.topbar-avatar {
+			    display: flex
+;
+    align-items: center;
+	justify-content: space-around;
 			background: #003366;
 			color: #fff;
-			font-weight: 600;
-			font-size: 1.1rem;
+			font-weight: 550;
+			font-size: 0.9rem;
 		}
 	}
 }
 
 
 .main-content {
-    margin: 0px 0px 0px 20px !important;
+    margin: 0px 0px 0px 30px !important;
 	padding: 96px 40px 40px 40px;
 	background: #f4f7fa;
 	min-height: 100vh;

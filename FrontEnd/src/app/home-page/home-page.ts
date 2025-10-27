@@ -1,5 +1,8 @@
 
 import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
+  // Form control for facilities multi-select
+  const toppings = new FormControl([]);
 
 
 @Component({
@@ -9,6 +12,52 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class HomePage {
+  expandedInstrumentColumns = ['Instruments', 'DePuy Synthes', 'Zimmer Bonnet', 'Smith + Nephew', 'Medacta', 'Exactech', 'TOTAL'];
+  // Expanded row data for instrument breakdown (mock)
+  expandedInstrumentRowsQuantity = [
+    { label: 'Drill Bit', values: [80, 80, '', '', '', 80] },
+    { label: 'Guide Pin', values: [9, 403, 8, '', '', 421] },
+    { label: 'Trial', values: [16, '', '', '', 10, 26] },
+    { label: 'Other Reusable Instruments', values: [95, 1493, 24, '', 55, 1697] }
+  ];
+  expandedInstrumentRowsPrice = [
+    { label: 'Drill Bit', values: [100, 120, '', '', '', 10] },
+    { label: 'Guide Pin', values: [19, 43, 18, '', '', 42] },
+    { label: 'Trial', values: [61, '', '', '', 10, 76] },
+    { label: 'Other Reusable Instruments', values: [195, 493, 24, '', 55, 1497] }
+  ];
+  getExpandedInstrumentRows(rowLabel: string) {
+    if (rowLabel === 'Avg. Quantity Per Case') {
+      return this.expandedInstrumentRowsQuantity;
+    } else if (rowLabel === 'Avg. Price Per Case') {
+      return this.expandedInstrumentRowsPrice;
+    }
+    return [];
+  }
+  getExpandedInstrumentTotal(rowLabel: string) {
+    let rows: { label: string; values: (number | string)[] }[] = [];
+    if (rowLabel === 'Avg. Quantity Per Case') {
+      rows = this.expandedInstrumentRowsQuantity;
+    } else if (rowLabel === 'Avg. Price Per Case') {
+      rows = this.expandedInstrumentRowsPrice;
+    }
+    const totals = ['TOTAL'];
+    for (let col = 0; col < 6; col++) {
+      let sum = 0;
+      for (const row of rows) {
+        const val = row.values[col];
+        if (typeof val === 'number' && !isNaN(val)) {
+          sum += val;
+        } else if (typeof val === 'string' && val !== '' && !isNaN(Number(val))) {
+          sum += Number(val);
+        }
+      }
+      totals.push(sum === 0 ? '' : String(sum));
+    }
+    return totals;
+  }
+  // Form control for facilities multi-select
+  toppings = new FormControl([]);
   // Data for All Manufacturers: Items for Review table
   manufacturerTableData = [
     {

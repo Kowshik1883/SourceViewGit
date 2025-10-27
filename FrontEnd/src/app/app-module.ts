@@ -1,6 +1,6 @@
 import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import {MatInputModule} from '@angular/material/input';
 import { TableModule } from 'primeng/table';
 import { ChartModule } from 'primeng/chart';
 import { CardModule, Card } from 'primeng/card';
@@ -16,14 +16,14 @@ import { RippleModule } from 'primeng/ripple';
 import { TooltipModule } from 'primeng/tooltip';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { PanelModule } from 'primeng/panel';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { DropdownModule } from 'primeng/dropdown';
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { HomePage } from './home-page/home-page';
 import { PrimeIcons } from 'primeng/api';
 
-
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -32,8 +32,11 @@ import { PrimeIcons } from 'primeng/api';
   ],
   imports: [
     BrowserModule,
+    MatInputModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     FormsModule,
+    MatSelectModule,
     TableModule,
     ChartModule,
     SelectModule,
