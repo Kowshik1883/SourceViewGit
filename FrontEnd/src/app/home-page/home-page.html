@@ -1,0 +1,251 @@
+<!-- Sidebar (Drawer) -->
+<p-drawer [modal]="false" [dismissible]="false" class="custom-sidebar" [visible]="false" position="left">
+	<ul class="sidebar-menu">
+		<li><i class="pi pi-chart-bar"></i> Dashboard</li>
+		<li><i class="pi pi-dollar"></i> Enter My Pricing</li>
+		<li><i class="pi pi-chart-line"></i> Insights</li>
+	</ul>
+</p-drawer>
+
+<!-- Topbar -->
+<div class="topbar">
+	<div class="topbar-left">
+<div class="sidebar-logo">
+		<img src="/assets/image.png" alt="SourceView Logo" style="height:32px; margin-bottom:24px;" />
+	</div>		<span class="customer-label">Customer Name</span>
+		<span class="customer-value">Ardent Health - Sports Medicine</span>
+	</div>
+	<div class="topbar-center">
+		<span class="facility-label">Facility</span>
+		<p-select [options]="facilities" [(ngModel)]="selectedFacility" styleClass="facility-dropdown"></p-select>
+		<span class="view-label">Selected View:</span>
+		<p-select [options]="views" [(ngModel)]="selectedView" styleClass="view-dropdown"></p-select>
+	</div>
+	<div class="topbar-right">
+		<button pButton pRipple icon="pi pi-question-circle" class="p-button-text p-button-rounded"></button>
+		<p-avatar label="AB" styleClass="topbar-avatar"></p-avatar>
+	</div>
+</div>
+
+<!-- Breadcrumb -->
+
+
+<!-- Sidebar -->
+<nav class="custom-sidebar">
+	
+	<ul class="sidebar-menu">
+		<li><i class="pi pi-chart-bar"></i> Dashboard</li>
+		<li><i class="pi pi-dollar"></i> Enter My Pricing</li>
+		<li><i class="pi pi-chart-line"></i> Insights</li>
+	</ul>
+</nav>
+
+<!-- Topbar -->
+<div class="topbar">
+	<div class="topbar-left">
+		<span class="customer-label">Customer Name</span>
+		<span class="customer-value">Ardent Health - Sports Medicine</span>
+	</div>
+	<div class="topbar-center">
+		<span class="facility-label">Facility</span>
+		<p-select class="facility-dropdown" [options]="facilities" [(ngModel)]="selectedFacility"></p-select>
+		<span class="view-label">Selected View:</span>
+		<p-select class="view-dropdown" [options]="views" [(ngModel)]="selectedView"></p-select>
+	</div>
+	<div class="topbar-right">
+		<button pButton icon="pi pi-question-circle" class="p-button-text p-button-rounded" style="font-size:1.3rem;"></button>
+		<div class="topbar-avatar p-d-flex p-ai-center p-jc-center" style="width:40px; height:40px; border-radius:50%; font-family:'Inter',sans-serif;">AB</div>
+	</div>
+</div>
+
+<!-- Breadcrumb -->
+<!-- <div class="breadcrumb">
+	Customer Record Search / Ardent Health - Sports Medicine
+</div> -->
+
+<!-- Main Content -->
+<div class="main-content" style="font-family:'Inter',sans-serif;">
+    <div class="breadcrumb">Customer Record Search / Ardent Health - Sports Medicine</div>
+	<h1 class="page-title" style="font-size:1.6rem; font-weight:600; color:#222; margin-bottom:8px;">Spend Analysis</h1>
+	<div class="page-subtitle" style="font-size:0.9rem; color:#555; margin-bottom:24px;">Compare spend analytics based on J&amp;J item matches and pricing.</div>
+	<div class="card-container">
+		<p-card class="dashboard-card">
+			<div class="card-title" style="font-size:1.15rem; font-weight:600; color:#222;">DPS vs. All Vendors</div>
+			<div class="card-subtitle" style="font-size:0.9rem; color:#555;margin-top: 5px;">View overall spend and savings across vendors, with a focus on the top 5 vendors based on spend.</div>
+			<div class="dashboard-charts">
+				<div class="chart-card">
+					<div class="chart-header">
+						<span class="chart-title">Current (Est) Spend</span>
+						<span  pTooltip="This chart shows the estimated current spend across vendors." tooltipPosition="top">
+							<button pButton pRipple icon="pi pi-question-circle" class="p-button-text p-button-rounded"></button>
+						</span>
+					</div>
+					<div class="chart-content">
+						<div class="chart-value">$53.1M</div>
+						<p-chart type="bar" [data]="currentSpendChartData" [options]="barChartOptions"></p-chart>
+					</div>
+				</div>
+				<div class="chart-card">
+					<div class="chart-header">
+						<span class="chart-title">Proposed Spend</span>
+						<span  pTooltip="This chart shows the proposed spend after DPS pricing." tooltipPosition="top">
+							<button pButton pRipple icon="pi pi-question-circle" class="p-button-text p-button-rounded"></button>
+						</span>
+					</div>
+					<div class="chart-content">
+						<div class="chart-value">$31.9M</div>
+						<p-chart type="bar" [data]="proposedSpendChartData" [options]="barChartOptions"></p-chart>
+					</div>
+				</div>
+				<div class="chart-card">
+					<div class="chart-header">
+						<span class="chart-title">Estimated Savings</span>
+						<span  pTooltip="This chart shows the estimated savings after DPS pricing." tooltipPosition="top">
+							<button pButton pRipple icon="pi pi-question-circle" class="p-button-text p-button-rounded"></button>
+						</span>
+					</div>
+					<div class="chart-content">
+						<div class="chart-value">$21.1M</div>
+						<div class="chart-subvalue">39% Savings</div>
+						<p-chart type="bar" [data]="savingsChartData" [options]="barChartOptions"></p-chart>
+					</div>
+				</div>
+				<div class="chart-card">
+					<div class="chart-header">
+						<span class="chart-title">Vendor Share at Proposed DPS Pricing</span>
+						<span  pTooltip="This chart shows the vendor share at proposed DPS pricing." tooltipPosition="top">
+							<button pButton pRipple icon="pi pi-question-circle" class="p-button-text p-button-rounded"></button>
+						</span>
+					</div>
+					<div class="chart-content">
+						<p-chart type="pie" [data]="vendorSharePieData" [options]="pieChartOptions"></p-chart>
+					</div>
+				</div>
+			</div>
+					<div class="chart-legend">
+						<span class="legend-item" *ngFor="let item of chartLegends">
+							<span class="legend-color" [ngStyle]="{'background': item.color}"></span>
+							<span style="font-size:0.9rem; font-family:'Inter',sans-serif;">{{item.label}}</span>
+						</span>
+					</div>
+		</p-card>
+	</div>
+	<p-card class="dashboard-card">
+		<div class="card-title" style="font-size:1.15rem; font-weight:600; color:#222;">Vendor Spend &amp; Savings Summary</div>
+	<div class="card-subtitle" style="font-size:0.9rem; color:#555;margin-top: 5px;">This table summarizes vendor spend, instrument costs, DPS equivalents, proposed spend, and total savings based on current and DPS pricing.</div>
+			<p-table [value]="vendorTableData" class="vendor-table" style="font-size:1rem; border: 0.5px solid rgb(221, 216, 216);font-weight: 500;">
+				<ng-template pTemplate="header">
+					<tr>
+						<th pSortableColumn="vendor">Vendor <p-sortIcon field="vendor"></p-sortIcon></th>
+						<th colspan="2" style="font-size:1rem; background:#0d355e; color:#fff; text-align:center;font-size: 0.9rem;">Current Spend</th>
+						<th colspan="3" style="font-size:1rem; background:#0d355e; color:#fff; text-align:center;font-size: 0.9rem;">Proposed DPS Pricing - Discount 63%</th>
+					</tr>
+					<tr>
+						<th></th>
+						<th pSortableColumn="netPrice">Net Price <p-sortIcon field="netPrice"></p-sortIcon></th>
+						<th pSortableColumn="instrumentSpend">Instrument Spend <p-sortIcon field="instrumentSpend"></p-sortIcon></th>
+						<th pSortableColumn="dpsNoEquivalent">DPS No Equivalent <p-sortIcon field="dpsNoEquivalent"></p-sortIcon></th>
+						<th pSortableColumn="proposedSpend">Proposed Spend <p-sortIcon field="proposedSpend"></p-sortIcon></th>
+						<th pSortableColumn="savings">Total Savings <p-sortIcon field="savings"></p-sortIcon></th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-rowData>
+					<tr>
+						<td>{{rowData.vendor}}</td>
+						<td>{{rowData.netPrice}}</td>
+						<td>{{rowData.instrumentSpend}}</td>
+						<td>{{rowData.dpsNoEquivalent}}</td>
+						<td>{{rowData.proposedSpend}}</td>
+						<td style="font-weight:bold;">
+							<span [ngStyle]="{'color': rowData.savings < 0 ? '#d32f2f' : '#388e3c'}">
+								${{rowData.savings | number}}
+							</span>
+						</td>
+					</tr>
+				</ng-template>
+			</p-table>
+	</p-card>
+    <p-card class="dashboard-card" >
+	<div class="card-title" style="font-size:1.15rem; font-weight:600; color:#1a2a3a; margin-bottom:2px;margin-top: 5px;">All Manufacturers: Items for Review</div>
+	<div class="card-subtitle" style="font-size:0.9rem; color:#555; margin-bottom:10px;">Description of data table below. Review instrument quantity and price per case for each manufacturer. Colored dots indicate if values are above target thresholds.</div>
+	<div style="display:flex; align-items:end; margin-bottom:8px;justify-content: flex-end;">
+		<span style="font-size:0.9rem; margin-right:16px;">Target Threshold:</span>
+		<span style="display:inline-flex; align-items:center; margin-right:12px;font-size: 0.9rem;"><span style="width:14px; height:14px; background:#FFC107; border-radius:50%; display:inline-block; margin-right:4px;"></span>5-10% above target</span>
+		<span style="display:inline-flex; align-items:center; margin-right:12px;font-size: 0.9rem;"><span style="width:14px; height:14px; background:#B71C1C; border-radius:50%; display:inline-block; margin-right:4px;"></span>> 10% above target</span>
+	</div>
+	<p-table [value]="manufacturerTableData" class="vendor-table" style="font-size:0.9rem;border: 0.5px solid rgb(221, 216, 216);" [rowExpandMode]="'single'">
+		<ng-template pTemplate="header">
+			<tr>
+				<th style="width:40px;"></th>
+				<th pSortableColumn="instrument">Instruments <p-sortIcon field="instrument"></p-sortIcon></th>
+				<th pSortableColumn="depuy">DePuy Synthes <p-sortIcon field="depuy"></p-sortIcon></th>
+				<th pSortableColumn="zimmer">Zimmer Bonnet <p-sortIcon field="zimmer"></p-sortIcon></th>
+				<th pSortableColumn="smith">Smith + Nephew <p-sortIcon field="smith"></p-sortIcon></th>
+				<th pSortableColumn="medacta">Medacta <p-sortIcon field="medacta"></p-sortIcon></th>
+				<th pSortableColumn="exactech">Exactech <p-sortIcon field="exactech"></p-sortIcon></th>
+				<th pSortableColumn="total">TOTAL <p-sortIcon field="total"></p-sortIcon></th>
+			</tr>
+		</ng-template>
+		<ng-template pTemplate="body" let-rowData let-expanded="expanded" let-rowIndex="rowIndex">
+			<tr>
+				<td>
+					<button pButton type="button" icon="pi pi-chevron-down" (click)="rowData.expanded = !rowData.expanded" [ngClass]="{'p-button-text': true, 'p-button-rounded': true}" [ngStyle]="{'transform': rowData.expanded ? 'rotate(180deg)' : 'none'}"></button>
+				</td>
+				<td>
+					<span style="font-size:1rem;">{{rowData.instrument}}</span>
+				</td>
+				<td>
+					<span>{{rowData.depuy}}</span>
+					<span *ngIf="rowData.depuyDot" [ngStyle]="{'background': rowData.depuyDot, 'width':'14px', 'height':'14px', 'border-radius':'50%', 'display':'inline-block', 'margin-left':'6px'}"></span>
+				</td>
+				<td>
+					<span>{{rowData.zimmer}}</span>
+					<span *ngIf="rowData.zimmerDot" [ngStyle]="{'background': rowData.zimmerDot, 'width':'14px', 'height':'14px', 'border-radius':'50%', 'display':'inline-block', 'margin-left':'6px'}"></span>
+				</td>
+				<td>
+					<span>{{rowData.smith}}</span>
+					<span *ngIf="rowData.smithDot" [ngStyle]="{'background': rowData.smithDot, 'width':'14px', 'height':'14px', 'border-radius':'50%', 'display':'inline-block', 'margin-left':'6px'}"></span>
+				</td>
+				<td>
+					<span>{{rowData.medacta}}</span>
+					<span *ngIf="rowData.medactaDot" [ngStyle]="{'background': rowData.medactaDot, 'width':'14px', 'height':'14px', 'border-radius':'50%', 'display':'inline-block', 'margin-left':'6px'}"></span>
+				</td>
+				<td>
+					<span>{{rowData.exactech}}</span>
+					<span *ngIf="rowData.exactechDot" [ngStyle]="{'background': rowData.exactechDot, 'width':'14px', 'height':'14px', 'border-radius':'50%', 'display':'inline-block', 'margin-left':'6px'}"></span>
+				</td>
+				<td style="font-weight:bold;">
+					<span>{{rowData.total}}</span>
+				</td>
+			</tr>
+			<tr *ngIf="rowData.expanded">
+				<td colspan="8" style="background:#f5f7fa; padding:16px;">
+					<!-- <div style="font-size:0.95rem; color:#333; font-weight:500; margin-bottom:8px;">Details for {{rowData.instrument}}</div> -->
+					<table style="width:100%; font-size:0.92rem;">
+						<tr style="background:#e9ecef;">
+							<th style="padding:6px 12px; text-align:left;">Metric</th>
+							<th style="padding:6px 12px; text-align:left;">Value</th>
+						</tr>
+						<tr>
+							<td style="padding:6px 12px;">Sample Metric 1</td>
+							<td style="padding:6px 12px;">123</td>
+						</tr>
+						<tr>
+							<td style="padding:6px 12px;">Sample Metric 2</td>
+							<td style="padding:6px 12px;">ABC</td>
+						</tr>
+						<tr>
+							<td style="padding:6px 12px;">Sample Metric 3</td>
+							<td style="padding:6px 12px;">Demo Value</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</ng-template>
+	</p-table>
+</p-card>
+</div>
+
+<!-- New Table: All Manufacturers: Items for Review -->
+
+
