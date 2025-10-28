@@ -180,29 +180,29 @@
 		<ng-template pTemplate="body" let-rowData let-expanded="expanded" let-rowIndex="rowIndex">
 			<tr>
 				<td>
-					<button pButton type="button" icon="pi pi-chevron-down" (click)="rowData.expanded = !rowData.expanded" [ngClass]="{'p-button-text': true, 'p-button-rounded': true}" [ngStyle]="{'transform': rowData.expanded ? 'rotate(180deg)' : 'none'}"></button>
+					<button pButton type="button" icon="pi pi-chevron-down" style="font-size: 0.9rem;" (click)="rowData.expanded = !rowData.expanded" [ngClass]="{'p-button-text': true, 'p-button-rounded': true}" [ngStyle]="{'transform': rowData.expanded ? 'rotate(180deg)' : 'none'}"></button>
 				</td>
 				<td>
-					<span style="font-size:1rem;">{{rowData.instrument}}</span>
+					<span style="font-size:0.9rem;">{{rowData.instrument}}</span>
 				</td>
 				<td>
-					<span>{{rowData.depuy}}</span>
+					<span style="font-size:0.9rem;">{{rowData.depuy}}</span>
 					<span *ngIf="rowData.depuyDot" [ngStyle]="{'background': rowData.depuyDot, 'width':'14px', 'height':'14px', 'border-radius':'50%', 'display':'inline-block', 'margin-left':'6px'}"></span>
 				</td>
 				<td>
-					<span>{{rowData.zimmer}}</span>
+					<span style="font-size:0.9rem;">{{rowData.zimmer}}</span>
 					<span *ngIf="rowData.zimmerDot" [ngStyle]="{'background': rowData.zimmerDot, 'width':'14px', 'height':'14px', 'border-radius':'50%', 'display':'inline-block', 'margin-left':'6px'}"></span>
 				</td>
 				<td>
-					<span>{{rowData.smith}}</span>
+					<span style="font-size:0.9rem;">{{rowData.smith}}</span>
 					<span *ngIf="rowData.smithDot" [ngStyle]="{'background': rowData.smithDot, 'width':'14px', 'height':'14px', 'border-radius':'50%', 'display':'inline-block', 'margin-left':'6px'}"></span>
 				</td>
 				<td>
-					<span>{{rowData.medacta}}</span>
+					<span style="font-size:0.9rem;">{{rowData.medacta}}</span>
 					<span *ngIf="rowData.medactaDot" [ngStyle]="{'background': rowData.medactaDot, 'width':'14px', 'height':'14px', 'border-radius':'50%', 'display':'inline-block', 'margin-left':'6px'}"></span>
 				</td>
 				<td>
-					<span>{{rowData.exactech}}</span>
+					<span style="font-size:0.9rem;">{{rowData.exactech}}</span>
 					<span *ngIf="rowData.exactechDot" [ngStyle]="{'background': rowData.exactechDot, 'width':'14px', 'height':'14px', 'border-radius':'50%', 'display':'inline-block', 'margin-left':'6px'}"></span>
 				</td>
 				<td style="font-weight:bold;">
@@ -217,10 +217,13 @@
 						   </tr> -->
 						   <tr *ngFor="let row of getExpandedInstrumentRows(rowData.instrument)">
 							   <td class="expanded-instrument-name"><i>{{row.label}}</i></td>
-							   <td *ngFor="let val of row.values">{{val}}</td>
+							   <td *ngFor="let val of row.values" style="text-decoration: underline;">{{val}}</td>
 						   </tr>
 						   <tr style="font-weight:bold; border-top:2px solid #ccc;">
-							   <td *ngFor="let val of getExpandedInstrumentTotal(rowData.instrument)" style="padding:6px 12px;">{{val}}</td>
+															 <td *ngFor="let val of getExpandedInstrumentTotal(rowData.instrument); let i = index" style="padding:6px 12px; position:relative;border-bottom:2px solid #bbb;">
+																 <span>{{val}}</span>
+																 <span *ngIf="i < getExpandedInstrumentTotal(rowData.instrument).length - 1" style="display:block;  position:absolute; left:0; right:0; bottom:0;"></span>
+															 </td>
 						   </tr>
 					   </table>
 				   </td>
