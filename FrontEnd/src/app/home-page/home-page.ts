@@ -125,7 +125,7 @@ export class HomePage {
     maintainAspectRatio: false
   };
   currentSpendChartData = {
-    labels: ['x'],
+    labels: [''],
     datasets: [
       { label: 'DePuy Synthes', backgroundColor: '#00B5E2', data: [10] },
       { label: 'Zimmer Biomet', backgroundColor: '#B085C9', data: [20] },
@@ -137,14 +137,14 @@ export class HomePage {
     ]
   };
   proposedSpendChartData = {
-    labels: ['x'],
+    labels: [''],
     datasets: [
       { label: 'DePuy Synthes', backgroundColor: '#00B5E2', data: [30] },
       { label: 'DPS No Equivalent', backgroundColor: '#A7A9AC', data: [10] }
     ]
   };
   savingsChartData = {
-    labels: ['x'],
+    labels: [''],
     datasets: [
       { label: 'Savings', backgroundColor: '#B085C9', data: [21] }
     ]
