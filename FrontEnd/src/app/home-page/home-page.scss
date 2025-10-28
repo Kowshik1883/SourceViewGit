@@ -138,6 +138,7 @@
 		flex: 1;
 		li {
 			display: flex;
+			width: 100%;
 			align-items: center;
 			font-size: 0;
 			padding: 16px 12px;
@@ -162,12 +163,14 @@
 		.sidebar-logo {
 			opacity: 1;
 		}
+
 		.sidebar-menu li {
 			font-size: 1rem;
 			padding: 16px 24px;
 			i {
 				margin-right: 12px;
 			}
+
 		}
         .main-content {
         margin: 0px 0px 0px 120px;
@@ -365,6 +368,16 @@
 	border-right:2px solid  #e0e0e0;
 	border-bottom: 1px solid #e0e0e0;
 
+}
+
+.icons{
+	height: 32vh;
+    display: flex
+;
+    align-items: start;
+    align-content: flex-end;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 .manufacture-table th{
 	background-color: #0d355e;

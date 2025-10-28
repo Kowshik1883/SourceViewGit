@@ -1,12 +1,3 @@
-<!-- Sidebar (Drawer) -->
-<p-drawer [modal]="false" [dismissible]="false" class="custom-sidebar" [visible]="false" position="left">
-	<ul class="sidebar-menu">
-		<li><i class="pi pi-chart-bar"></i> Dashboard</li>
-		<li><i class="pi pi-dollar"></i> Enter My Pricing</li>
-		<li><i class="pi pi-chart-line"></i> Insights</li>
-	</ul>
-</p-drawer>
-
 <!-- Topbar -->
 
 
@@ -17,9 +8,13 @@
 <nav class="custom-sidebar">
 	
 	<ul class="sidebar-menu">
-		<li><i class="pi pi-chart-bar"></i> Dashboard</li>
-		<li><i class="pi pi-dollar"></i> Enter My Pricing</li>
+		<li><i class="pi pi-bars"></i></li>
+		<div class="icons">
+		<li class="dashboardIcon"><mat-icon style="margin-right: 10px;">dashboard </mat-icon>Dashboard</li>
+		<li><i class="pi pi-chart-bar"></i> Enter My Pricing</li>
+		
 		<li><i class="pi pi-chart-line"></i> Insights</li>
+		</div>
 	</ul>
 </nav>
 

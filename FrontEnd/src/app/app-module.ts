@@ -22,7 +22,7 @@ import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { HomePage } from './home-page/home-page';
 import { PrimeIcons } from 'primeng/api';
-
+import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
@@ -50,6 +50,7 @@ import {MatSelectModule} from '@angular/material/select';
     AvatarModule,
     RippleModule,
     TooltipModule,
+    MatIconModule,
     // DropdownModule,
     ProgressBarModule,
     PanelModule,
