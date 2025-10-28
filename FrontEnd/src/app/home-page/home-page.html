@@ -132,17 +132,17 @@
 			<p-table [value]="vendorTableData" class="vendor-table" style="font-size:1rem; border: 0.5px solid rgb(221, 216, 216);font-weight: 500;">
 				<ng-template pTemplate="header">
 					<tr>
-						<th pSortableColumn="vendor">Vendor <p-sortIcon field="vendor"></p-sortIcon></th>
-						<th colspan="2" style="font-size:1rem; background:#0d355e; color:#fff; text-align:center;font-size: 0.9rem;">Current Spend</th>
+						<th rowspan="2"  class="vendorHeader">Vendor </th>
+						<th  colspan="2" style="font-size:1rem; background:#0d355e; color:#fff; text-align:center;font-size: 0.9rem;">Current Spend</th>
 						<th colspan="3" style="font-size:1rem; background:#0d355e; color:#fff; text-align:center;font-size: 0.9rem;">Proposed DPS Pricing - Discount 63%</th>
 					</tr>
 					<tr>
-						<th></th>
-						<th pSortableColumn="netPrice">Net Price <p-sortIcon field="netPrice"></p-sortIcon></th>
+						
+						<th  pSortableColumn="netPrice">Net Price <p-sortIcon field="netPrice"></p-sortIcon></th>
 						<th pSortableColumn="instrumentSpend">Instrument Spend <p-sortIcon field="instrumentSpend"></p-sortIcon></th>
-						<th pSortableColumn="dpsNoEquivalent">DPS No Equivalent <p-sortIcon field="dpsNoEquivalent"></p-sortIcon></th>
-						<th pSortableColumn="proposedSpend">Proposed Spend <p-sortIcon field="proposedSpend"></p-sortIcon></th>
-						<th pSortableColumn="savings">Total Savings <p-sortIcon field="savings"></p-sortIcon></th>
+						<th  pSortableColumn="dpsNoEquivalent">DPS No Equivalent <p-sortIcon field="dpsNoEquivalent"></p-sortIcon></th>
+						<th  pSortableColumn="proposedSpend">Proposed Spend <p-sortIcon field="proposedSpend"></p-sortIcon></th>
+						<th  pSortableColumn="savings">Total Savings <p-sortIcon field="savings"></p-sortIcon></th>
 					</tr>
 				</ng-template>
 				<ng-template pTemplate="body" let-rowData>
@@ -169,7 +169,7 @@
 		<span style="display:inline-flex; align-items:center; margin-right:12px;font-size: 0.9rem;"><span style="width:14px; height:14px; background:#FFC107;  display:inline-block; margin-right:4px;"></span>5-10% above target</span>
 		<span style="display:inline-flex; align-items:center; margin-right:12px;font-size: 0.9rem;"><span style="width:14px; height:14px; background:#B71C1C;  display:inline-block; margin-right:4px;"></span>> 10% above target</span>
 	</div>
-	<p-table [value]="manufacturerTableData" class="vendor-table" style="font-size:0.9rem;border: 0.5px solid rgb(221, 216, 216);" [rowExpandMode]="'single'">
+	<p-table [value]="manufacturerTableData" class="manufacture-table" style="font-size:0.9rem;border: 0.5px solid rgb(221, 216, 216);" [rowExpandMode]="'single'">
 		<ng-template pTemplate="header">
 			<tr>
 				<th style="width:40px;"></th>
@@ -217,9 +217,9 @@
 			   <tr *ngIf="rowData.expanded" class="expanded-row">
 				   <td class="expanded-cell" colspan="8">
 					   <table class="expanded-metric-table" style="width:100%;">
-						   <tr style="background:#e9ecef;">
+						   <!-- <tr style="background:#e9ecef;">
 							   <th *ngFor="let col of expandedInstrumentColumns" style="padding:6px 12px; text-align:left;">{{col}}</th>
-						   </tr>
+						   </tr> -->
 						   <tr *ngFor="let row of getExpandedInstrumentRows(rowData.instrument)">
 							   <td class="expanded-instrument-name"><i>{{row.label}}</i></td>
 							   <td *ngFor="let val of row.values">{{val}}</td>
