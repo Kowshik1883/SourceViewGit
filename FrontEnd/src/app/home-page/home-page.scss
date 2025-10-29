@@ -1,3 +1,54 @@
+// Responsive styles
+@media (max-width: 900px) {
+	.main-content {
+		margin-left: 0;
+		padding: 24px 10px 24px 10px;
+	}
+	.card-container {
+		gap: 18px;
+	}
+	.dashboard-charts {
+		flex-direction: column;
+		gap: 18px;
+	}
+	.cards-row {
+		flex-direction: column;
+		gap: 18px;
+	}
+}
+
+@media (max-width: 700px) {
+	.page-header-row {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.5rem;
+	}
+	.page-title-note-group {
+		align-items: flex-start;
+	}
+	.main-content {
+		padding: 12px 2px 12px 2px;
+	}
+	.card-title, .card-subtitle, .manufacturer-title, .manufacturer-subtitle {
+		font-size: 1rem;
+	}
+	.dashboard-card {
+		padding: 16px 8px 12px 8px;
+	}
+	.chart-card {
+		padding: 12px 8px 8px 8px;
+		min-width: 0;
+	}
+	.vendor-table th, .manufacture-table th, .vendor-table td, .manufacture-table td {
+		font-size: 0.85rem;
+		padding: 6px 4px;
+	}
+	.target-threshold-row {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 4px;
+	}
+}
 /* Expanded row styling for instrument table */
 .manufacture-table tr.expanded-row {
 	background: #f5f7fa;
@@ -196,8 +247,12 @@
 // Fixed Topbar
 
 
+.page-header-row{
+	display:flex; align-items:center; justify-content:space-between;
+}
+.page-subtitle{
 
-
+}
 
 .custom-sidebar:hover ~ .main-content {
 	margin-left: 220px;
@@ -356,15 +411,16 @@
 	background: #f4f7fa;
 	min-height: 100vh;
 }
-
-.breadcrumb {
-	font-size: 0.9rem;
-    margin-top: 51px;
-    margin-bottom: 0px;
-	// color: #888;
-	// margin: 18px 0 0 260px;
+.card-subtitle{
+	font-size:0.9rem; color:#555;margin-top: 5px;
 }
-
+.breadcrumb {
+	font-size: 0.85rem;
+    margin-top: 51px;
+}
+.card-title{
+	font-size:1.15rem; font-weight:600; color:#222;
+}
 .main-content {
 	margin-left: 260px;
 	padding: 32px 40px 40px 40px;
@@ -373,14 +429,15 @@
 }
 
 .page-title {
-	font-size: 2.1rem;
+	font-size: 1.7rem;
 	font-weight: 700;
 	margin-bottom: 0.2em;
 }
 .page-subtitle {
-	font-size: 1.1rem;
+	font-size: 0.95rem;
 	color: #666;
 	margin-bottom: 32px;
+	margin-top: 10px;
 }
 
 .cards-row {
