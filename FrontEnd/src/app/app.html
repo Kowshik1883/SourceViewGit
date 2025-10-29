@@ -27,14 +27,12 @@
 			[filter]="true"
 			filterPlaceholder="Search facilities"
 			placeholder="Select facilities"
-			styleClass="filter-control filter-control--multi"
-			panelStyleClass="filter-panel filter-panel--multi"
-			dropdownIcon="pi pi-chevron-down"
-			appendTo="body"
-			[showToggleAll]="false"
-			emptyMessage="No facilities found">
-		</p-multiSelect>
-	</div>
+            styleClass="filter-control filter-control--multi"
+            panelStyleClass="filter-panel filter-panel--multi"
+            [showToggleAll]="false"
+            emptyMessage="No facilities found">
+        </p-multiSelect>
+    </div>
 	<div class="topbar-center2">
 		<span class="view-label">Selected View</span>
 		<p-select
@@ -42,13 +40,11 @@
 			[(ngModel)]="selectedView"
 			optionLabel="label"
 			optionValue="value"
-			placeholder="Select view"
-			showClear="true"
-			styleClass="filter-control filter-control--single"
-			panelStyleClass="filter-panel filter-panel--single"
-			dropdownIcon="pi pi-chevron-down"
-			appendTo="body">
-		</p-select>
+            placeholder="Select view"
+            showClear="true"
+            styleClass="filter-control filter-control--single"
+            panelStyleClass="filter-panel filter-panel--single">
+        </p-select>
 	</div>
 
 	<div class="topbar-right">
