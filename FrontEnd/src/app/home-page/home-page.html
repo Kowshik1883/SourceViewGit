@@ -1,17 +1,17 @@
-<div class="page-content">
+<div class="page-content" style="font-family:'Inter',sans-serif;">
 		<div class="breadcrumb">Customer Record Search / Ardent Health - Sports Medicine</div>
-		<div class="page-header-row">
-			<h1 class="page-title">Spend Analysis</h1>
-			<div class="page-title-note-group">
-				<span class="page-title-note">*Savings updated based on net pricing</span>
-				<span class="page-title-timeframe">Usage Data Timeframe: 01/01/24 - 06/01/24 <i class="page-title-info-icon pi pi-info-circle"></i></span>
+		<div style="display:flex; align-items:center; justify-content:space-between;">
+			<h1 class="page-title" style="font-size:1.6rem; font-weight:600; color:#222; margin-bottom:8px;">Spend Analysis</h1>
+			<div style="display:flex; flex-direction:column; align-items:flex-end;">
+				<span style="color:#0090d7; font-size:0.8rem; font-weight:500; margin-bottom:2px;">*Savings updated based on net pricing</span>
+				<span style="font-size:0.8rem; color:#222; display:flex; align-items:center;">Usage Data Timeframe: 01/01/24 - 06/01/24 <i class="pi pi-info-circle" style="font-size:1.1rem; margin-left:4px; color:#0090d7;"></i></span>
 			</div>
 		</div>
-		<div class="page-subtitle">Compare spend analytics based on J&amp;J item matches and pricing.</div>
+		<div class="page-subtitle" style="font-size:0.9rem; color:#555; margin-bottom:24px;">Compare spend analytics based on J&amp;J item matches and pricing.</div>
 	<div class="card-container">
 		<p-card class="dashboard-card">
-		<div class="card-title">DPS vs. All Vendors</div>
-		<div class="card-subtitle">View overall spend and savings across vendors, with a focus on the top 5 vendors based on spend.</div>
+			<div class="card-title" style="font-size:1.15rem; font-weight:600; color:#222;">DPS vs. All Vendors</div>
+			<div class="card-subtitle" style="font-size:0.9rem; color:#555;margin-top: 5px;">View overall spend and savings across vendors, with a focus on the top 5 vendors based on spend.</div>
 			<div class="dashboard-charts">
 				<div class="chart-card">
 					<div class="chart-header">
@@ -71,8 +71,8 @@
 		</p-card>
 	</div>
 	<p-card class="dashboard-card">
-		<div class="card-title">Vendor Spend &amp; Savings Summary</div>
-	<div class="card-subtitle">This table summarizes vendor spend, instrument costs, DPS equivalents, proposed spend, and total savings based on current and DPS pricing.</div>
+		<div class="card-title" style="font-size:1.15rem; font-weight:600; color:#222;">Vendor Spend &amp; Savings Summary</div>
+	<div class="card-subtitle" style="font-size:0.9rem; color:#555;margin-top: 5px;">This table summarizes vendor spend, instrument costs, DPS equivalents, proposed spend, and total savings based on current and DPS pricing.</div>
 			<p-table [value]="vendorTableData" class="vendor-table" style="font-size:1rem; border: 0.5px solid rgb(221, 216, 216);font-weight: 500;">
 				<ng-template pTemplate="header">
 					<tr>
@@ -106,12 +106,12 @@
 			</p-table>
 	</p-card>
     <p-card class="dashboard-card" >
-	<div class="card-title manufacturer-title">All Manufacturers: Items for Review</div>
-	<div class="card-subtitle manufacturer-subtitle">Description of data table below. Review instrument quantity and price per case for each manufacturer. Colored dots indicate if values are above target thresholds.</div>
-	<div class="target-threshold-row">
-		<span class="target-threshold-label">Target Threshold:</span>
-		<span class="target-threshold-item"><span class="target-dot dot-yellow"></span>5-10% above target</span>
-		<span class="target-threshold-item"><span class="target-dot dot-red"></span>> 10% above target</span>
+	<div class="card-title" style="font-size:1.15rem; font-weight:600; color:#1a2a3a; margin-bottom:2px;margin-top: 5px;">All Manufacturers: Items for Review</div>
+	<div class="card-subtitle" style="font-size:0.9rem; color:#555; margin-bottom:10px;">Description of data table below. Review instrument quantity and price per case for each manufacturer. Colored dots indicate if values are above target thresholds.</div>
+	<div style="display:flex; align-items:end; margin-bottom:8px;justify-content: flex-end;">
+		<span style="font-size:0.9rem; margin-right:16px;">Target Threshold:</span>
+		<span style="display:inline-flex; align-items:center; margin-right:12px;font-size: 0.9rem;"><span style="width:14px; height:14px; background:#FFC107;  display:inline-block; margin-right:4px;"></span>5-10% above target</span>
+		<span style="display:inline-flex; align-items:center; margin-right:12px;font-size: 0.9rem;"><span style="width:14px; height:14px; background:#B71C1C;  display:inline-block; margin-right:4px;"></span>> 10% above target</span>
 	</div>
 	<p-table [value]="manufacturerTableData" class="manufacture-table" style="font-size:0.9rem;border: 0.5px solid rgb(221, 216, 216);" [rowExpandMode]="'single'">
 		<ng-template pTemplate="header">
@@ -132,27 +132,27 @@
 					<button pButton type="button" icon="pi pi-chevron-down" style="font-size: 0.9rem;" (click)="rowData.expanded = !rowData.expanded" [ngClass]="{'p-button-text': true, 'p-button-rounded': true}" [ngStyle]="{'transform': rowData.expanded ? 'rotate(180deg)' : 'none'}"></button>
 				</td>
 				<td>
-					<span class="instrument-label">{{rowData.instrument}}</span>
+					<span style="font-size:0.9rem;">{{rowData.instrument}}</span>
 				</td>
 				<td>
-					<span class="instrument-label">{{rowData.depuy}}</span>
-					<span *ngIf="rowData.depuyDot" class="dynamic-dot" [ngStyle]="{'background': rowData.depuyDot}"></span>
+					<span style="font-size:0.9rem;">{{rowData.depuy}}</span>
+					<span *ngIf="rowData.depuyDot" [ngStyle]="{'background': rowData.depuyDot, 'width':'14px', 'height':'14px', 'border-radius':'50%', 'display':'inline-block', 'margin-left':'6px'}"></span>
 				</td>
 				<td>
-					<span class="instrument-label">{{rowData.zimmer}}</span>
-					<span *ngIf="rowData.zimmerDot" class="dynamic-dot" [ngStyle]="{'background': rowData.zimmerDot}"></span>
+					<span style="font-size:0.9rem;">{{rowData.zimmer}}</span>
+					<span *ngIf="rowData.zimmerDot" [ngStyle]="{'background': rowData.zimmerDot, 'width':'14px', 'height':'14px', 'border-radius':'50%', 'display':'inline-block', 'margin-left':'6px'}"></span>
 				</td>
 				<td>
-					<span class="instrument-label">{{rowData.smith}}</span>
-					<span *ngIf="rowData.smithDot" class="dynamic-dot" [ngStyle]="{'background': rowData.smithDot}"></span>
+					<span style="font-size:0.9rem;">{{rowData.smith}}</span>
+					<span *ngIf="rowData.smithDot" [ngStyle]="{'background': rowData.smithDot, 'width':'14px', 'height':'14px', 'border-radius':'50%', 'display':'inline-block', 'margin-left':'6px'}"></span>
 				</td>
 				<td>
-					<span class="instrument-label">{{rowData.medacta}}</span>
-					<span *ngIf="rowData.medactaDot" class="dynamic-dot" [ngStyle]="{'background': rowData.medactaDot}"></span>
+					<span style="font-size:0.9rem;">{{rowData.medacta}}</span>
+					<span *ngIf="rowData.medactaDot" [ngStyle]="{'background': rowData.medactaDot, 'width':'14px', 'height':'14px', 'border-radius':'50%', 'display':'inline-block', 'margin-left':'6px'}"></span>
 				</td>
 				<td>
-					<span class="instrument-label">{{rowData.exactech}}</span>
-					<span *ngIf="rowData.exactechDot" class="dynamic-dot" [ngStyle]="{'background': rowData.exactechDot}"></span>
+					<span style="font-size:0.9rem;">{{rowData.exactech}}</span>
+					<span *ngIf="rowData.exactechDot" [ngStyle]="{'background': rowData.exactechDot, 'width':'14px', 'height':'14px', 'border-radius':'50%', 'display':'inline-block', 'margin-left':'6px'}"></span>
 				</td>
 				<td style="font-weight:bold;">
 					<span>{{rowData.total}}</span>

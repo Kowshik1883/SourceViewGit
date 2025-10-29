@@ -150,10 +150,26 @@ export class HomePage {
     ]
   };
   pieChartOptions = {
-    plugins: { legend: { display: false } },
+    plugins: {
+      legend: { display: false },
+      datalabels: {
+        display: true,
+        color: '#222',
+        font: { weight: 'bold', size: 14 },
+        formatter: (value: number, context: any) => {
+          const data = context.chart.data.datasets[0].data;
+          const total = data.reduce((acc: number, val: number) => acc + val, 0);
+          const percent = total ? Math.round((value / total) * 100) : 0;
+          return percent + '%';
+        }
+      }
+    },
     responsive: true,
     maintainAspectRatio: false
   };
+  // Make sure datalabels plugin is loaded globally (if not already)
+  // import ChartDataLabels from 'chartjs-plugin-datalabels';
+  // Chart.register(ChartDataLabels);
   vendorSharePieData = {
     labels: ['DePuy Synthes', 'Zimmer Biomet', 'Smith + Nephew', 'Medacta', 'Stryker', 'Exactech', 'Others'],
     datasets: [

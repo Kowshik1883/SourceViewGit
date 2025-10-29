@@ -24,6 +24,7 @@ import { HomePage } from './home-page/home-page';
 import { PrimeIcons } from 'primeng/api';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
+
 import { EnterPricing } from './enter-pricing/enter-pricing';
 
 @NgModule({
@@ -33,6 +34,7 @@ import { EnterPricing } from './enter-pricing/enter-pricing';
     EnterPricing
   ],
   imports: [
+    CardModule,
     BrowserModule,
     MatInputModule,
     ReactiveFormsModule,
