@@ -38,7 +38,7 @@
 				transition: margin-right 0.2s;
 			}
 			&:hover {
-				background: #e3f2fd;
+				background: var(--sv-blue-100);
                 
 			}
 		}
@@ -127,7 +127,7 @@
 ;
     align-items: center;
 	justify-content: space-around;
-			background: #003366;
+			background: var(--sv-blue-900);
 			color: #fff;
 			font-weight: 550;
 			font-size: 0.9rem;

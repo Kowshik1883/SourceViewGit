@@ -93,10 +93,11 @@ export class HomePage {
     { label: 'Vendor Comparison', value: 'vendor' }
   ];
   selectedView = 'spend';
+  readonly svBlue400 = this.getCssColorValue('--sv-blue-400', '#00B5E2');
 
   // Chart Legends
   chartLegends = [
-    { label: 'DePuy Synthes', color: '#00B5E2' },
+    { label: 'DePuy Synthes', color: this.svBlue400 },
     { label: 'DPS No Equivalent', color: '#A7A9AC' },
     { label: 'Zimmer Biomet', color: '#B085C9' },
     { label: 'Smith + Nephew', color: '#E6A1C5' },
@@ -127,7 +128,7 @@ export class HomePage {
   currentSpendChartData = {
     labels: [''],
     datasets: [
-      { label: 'DePuy Synthes', backgroundColor: '#00B5E2', data: [10] },
+      { label: 'DePuy Synthes', backgroundColor: this.svBlue400, data: [10] },
       { label: 'Zimmer Biomet', backgroundColor: '#B085C9', data: [20] },
       { label: 'Smith + Nephew', backgroundColor: '#E6A1C5', data: [15] },
       { label: 'Medacta', backgroundColor: '#F7CAC9', data: [5] },
@@ -139,7 +140,7 @@ export class HomePage {
   proposedSpendChartData = {
     labels: [''],
     datasets: [
-      { label: 'DePuy Synthes', backgroundColor: '#00B5E2', data: [30] },
+      { label: 'DePuy Synthes', backgroundColor: this.svBlue400, data: [30] },
       { label: 'DPS No Equivalent', backgroundColor: '#A7A9AC', data: [10] }
     ]
   };
@@ -176,7 +177,7 @@ export class HomePage {
       {
         data: [30, 20, 20, 10, 10, 5, 5],
         backgroundColor: [
-          '#00B5E2', '#B085C9', '#E6A1C5', '#F7CAC9', '#B565A7', '#6C3483', '#34495E'
+          this.svBlue400, '#B085C9', '#E6A1C5', '#F7CAC9', '#B565A7', '#6C3483', '#34495E'
         ]
       }
     ]
@@ -215,4 +216,12 @@ export class HomePage {
       total: 799
     }
   ];
+
+  private getCssColorValue(variableName: string, fallback: string): string {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return fallback;
+    }
+    const value = getComputedStyle(document.documentElement).getPropertyValue(variableName);
+    return value ? value.trim() || fallback : fallback;
+  }
 }

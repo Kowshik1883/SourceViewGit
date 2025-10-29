@@ -19,6 +19,17 @@ html {
   ));
 }
 
+:root {
+  --sv-blue-900: #003366;
+  --sv-blue-800: #0d355e;
+  --sv-blue-700: #135ba1;
+  --sv-blue-600: #1976d2;
+  --sv-blue-500: #0090d7;
+  --sv-blue-400: #00B5E2;
+  --sv-blue-100: #e3f2fd;
+  --sv-blue-50: #eaf6fb;
+}
+
 body {
   // Default the application to a light color theme. This can be changed to
   // `dark` to enable the dark color theme, or to `light dark` to defer to the
