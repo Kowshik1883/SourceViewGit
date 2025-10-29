@@ -1,41 +1,59 @@
 <nav class="custom-sidebar">
-	
 	<ul class="sidebar-menu">
 		<li><i class="pi pi-bars"></i></li>
 		<div class="icons">
-		<li routerLink="/home" class="dashboardIcon"><mat-icon style="margin-right: 10px;">dashboard </mat-icon>Dashboard</li>
-		<li routerLink="/enter-pricing"><i class="pi pi-chart-bar"></i> Enter My Pricing</li>
-		<li><i class="pi pi-chart-line"></i> Insights</li>
+			<li routerLink="/home" class="dashboardIcon"><mat-icon style="margin-right: 10px;">dashboard</mat-icon>Dashboard</li>
+			<li routerLink="/enter-pricing"><i class="pi pi-chart-bar"></i> Enter My Pricing</li>
+			<li><i class="pi pi-chart-line"></i> Insights</li>
 		</div>
 	</ul>
 </nav>
 <div class="topbar">
 	<div class="sidebar-logo">
-		<img src="assets/image.png" alt="Logo" class="logo-image" height="50" width="180"/>
+		<img src="assets/image.png" alt="Logo" class="logo-image" height="50" width="180" />
 	</div>
 	<div class="topbar-left">
 		<span class="customer-label">Customer Name</span>
-		<span class="customer-value">Ardent Health - Sports Medicine</span>
+		<span class="customer-value">{{ customerName }}</span>
 	</div>
-	<div class="topbar-center1" style="display:flex; flex-direction:column; align-items:flex-start; gap:2px; min-width:100px; max-width:140px; width:100%;">
-	<span class="facility-label">Facility</span>
-		<mat-form-field appearance="fill" class="facility-dropdown" style="font-size:0.9rem; width:100%; margin-bottom:0;">
-			<mat-select [formControl]="toppings" multiple style="font-size:0.9rem; min-height:28px;">
-				<mat-option *ngFor="let facility of facilities" [value]="facility.value">{{facility.label}}</mat-option>
-			</mat-select>
-		</mat-form-field>
+	<div class="topbar-center1">
+		<span class="facility-label">Facility</span>
+		<p-multiSelect
+			[options]="facilities"
+			[(ngModel)]="selectedFacilities"
+			optionLabel="label"
+			optionValue="value"
+			display="chip"
+			[filter]="true"
+			filterPlaceholder="Search facilities"
+			placeholder="Select facilities"
+			styleClass="filter-control filter-control--multi"
+			panelStyleClass="filter-panel filter-panel--multi"
+			dropdownIcon="pi pi-chevron-down"
+			appendTo="body"
+			[showToggleAll]="false"
+			emptyMessage="No facilities found">
+		</p-multiSelect>
 	</div>
-	<div class="topbar-center2" style="display:flex; flex-direction:column; align-items:flex-start; gap:2px; min-width:90px; max-width:120px; width:100%;">
-	<span class="view-label">Selected View:</span>		<mat-form-field appearance="fill" class="view-dropdown" style="font-size:0.9rem; width:100%; margin-bottom:0;">
-			<mat-select [(ngModel)]="selectedView" name="view" style="font-size:0.9rem; min-height:28px;">
-				<mat-option *ngFor="let view of views" [value]="view.value">{{view.label}}</mat-option>
-			</mat-select>
-		</mat-form-field>
+	<div class="topbar-center2">
+		<span class="view-label">Selected View</span>
+		<p-select
+			[options]="views"
+			[(ngModel)]="selectedView"
+			optionLabel="label"
+			optionValue="value"
+			placeholder="Select view"
+			showClear="true"
+			styleClass="filter-control filter-control--single"
+			panelStyleClass="filter-panel filter-panel--single"
+			dropdownIcon="pi pi-chevron-down"
+			appendTo="body">
+		</p-select>
 	</div>
-	
+
 	<div class="topbar-right">
-		<button pButton icon="pi pi-question-circle" class="p-button-text p-button-rounded" style="font-size:1.3rem;"></button>
-		<div class="topbar-avatar p-d-flex p-ai-center p-jc-center" style="width:40px; height:40px; border-radius:50%; font-family:'Inter',sans-serif;">AB</div>
+		<button pButton icon="pi pi-question-circle" class="p-button-text p-button-rounded" style="font-size:1.3rem;" type="button" aria-label="Help"></button>
+		<div class="topbar-avatar">AB</div>
 	</div>
 </div>
 <div class="main-content"><router-outlet></router-outlet></div>

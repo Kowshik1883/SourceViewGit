@@ -1,11 +1,9 @@
 import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {MatInputModule} from '@angular/material/input';
 import { TableModule } from 'primeng/table';
 import { ChartModule } from 'primeng/chart';
 import { CardModule, Card } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
-import { SelectModule } from 'primeng/select';
 import { DrawerModule } from 'primeng/drawer';
 import { InputTextModule } from 'primeng/inputtext';
 import { MenubarModule } from 'primeng/menubar';
@@ -17,13 +15,13 @@ import { TooltipModule } from 'primeng/tooltip';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { PanelModule } from 'primeng/panel';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-// import { DropdownModule } from 'primeng/dropdown';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { SelectModule } from 'primeng/select';
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { HomePage } from './home-page/home-page';
-import { PrimeIcons } from 'primeng/api';
 import {MatIconModule} from '@angular/material/icon';
-import {MatSelectModule} from '@angular/material/select';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { EnterPricing } from './enter-pricing/enter-pricing';
 
@@ -36,13 +34,13 @@ import { EnterPricing } from './enter-pricing/enter-pricing';
   imports: [
     CardModule,
     BrowserModule,
-    MatInputModule,
     ReactiveFormsModule,
     AppRoutingModule,
     FormsModule,
-    MatSelectModule,
+    BrowserAnimationsModule,
     TableModule,
     ChartModule,
+    MultiSelectModule,
     SelectModule,
     ButtonModule,
     DrawerModule,
@@ -55,7 +53,6 @@ import { EnterPricing } from './enter-pricing/enter-pricing';
     RippleModule,
     TooltipModule,
     MatIconModule,
-    // DropdownModule,
     ProgressBarModule,
     PanelModule,
     Card

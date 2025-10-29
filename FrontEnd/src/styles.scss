@@ -8,6 +8,10 @@
 @import "primeicons/primeicons.css";
 @import '../node_modules/primeicons/primeicons.css';
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 html {
   @include mat.theme((
     color: (
@@ -28,6 +32,22 @@ html {
   --sv-blue-400: #00B5E2;
   --sv-blue-100: #e3f2fd;
   --sv-blue-50: #eaf6fb;
+
+  --sv-surface: #ffffff;
+  --sv-surface-muted: #f4f7fb;
+  --sv-surface-elevated: rgba(255, 255, 255, 0.94);
+  --sv-border: #d7e3f4;
+  --sv-border-soft: rgba(19, 91, 161, 0.12);
+  --sv-border-strong: rgba(19, 91, 161, 0.18);
+  --sv-text-strong: #1a2a3a;
+  --sv-text-muted: #5c6b81;
+  --sv-text-soft: #7a8aa2;
+  --sv-shadow-base: 0 14px 32px rgba(15, 23, 42, 0.08);
+  --sv-shadow-hover: 0 20px 44px rgba(13, 53, 94, 0.16);
+  --sv-font-sans: 'Inter', 'Helvetica Neue', sans-serif;
+  --sv-glass-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(227, 240, 255, 0.9) 100%);
+  --sv-glass-tint: linear-gradient(135deg, rgba(227, 240, 255, 0.32) 0%, rgba(205, 228, 255, 0.32) 100%);
+  --sv-focus-ring: 0 0 0 3px rgba(25, 118, 210, 0.25);
 }
 
 body {
@@ -39,9 +59,9 @@ body {
   // Set a default background, font and text colors for the application using
   // Angular Material's system-level CSS variables. Learn more about these
   // variables at https://material.angular.dev/guide/system-variables
-  background-color: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
-  font: var(--mat-sys-body-medium);
+  background-color: var(--sv-surface-muted);
+  color: var(--sv-text-strong);
+  font-family: var(--sv-font-sans, Roboto, "Helvetica Neue", sans-serif);
 
   // Reset the user agent margin.
   margin: 0;
@@ -49,4 +69,4 @@ body {
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: var(--sv-font-sans, Roboto, "Helvetica Neue", sans-serif); }

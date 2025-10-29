@@ -1,15 +1,16 @@
 .custom-sidebar {
 	position: fixed;
-	top: 64px; // height of navbar
+	top: 64px;
 	left: 0;
 	width: 60px;
 	height: calc(100vh - 64px);
-	background: #f8fafc;
+	background: #ffffff;
 	border-right: 1px solid #e0e0e0;
 	z-index: 900;
 	display: flex;
 	flex-direction: column;
 	transition: width 0.2s cubic-bezier(.4,0,.2,1);
+	padding: 24px 0 32px 0;
 
 	.sidebar-logo {
 		text-align: center;
@@ -17,11 +18,13 @@
 		transition: opacity 0.2s;
 		opacity: 0;
 	}
+
 	.sidebar-menu {
 		list-style: none;
 		padding: 0;
 		margin: 0;
 		flex: 1;
+
 		li {
 			display: flex;
 			width: 100%;
@@ -31,21 +34,38 @@
 			color: #34495e;
 			cursor: pointer;
 			white-space: nowrap;
-            // justify-content: center;
-			i {
+			transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+
+			i,
+			mat-icon {
 				margin-right: 0;
 				font-size: 1.4rem;
-				transition: margin-right 0.2s;
+				transition: margin-right 0.2s, color 0.2s;
+				color: var(--sv-blue-600);
 			}
+
 			&:hover {
 				background: var(--sv-blue-100);
-                
+				color: var(--sv-blue-700);
+				transform: translateX(4px);
+
+				i,
+				mat-icon {
+					color: var(--sv-blue-700);
+				}
 			}
+		}
+
+		.icons {
+			display: flex;
+			flex-direction: column;
+			gap: 4px;
 		}
 	}
 
 	&:hover {
 		width: 220px;
+
 		.sidebar-logo {
 			opacity: 1;
 		}
@@ -53,92 +73,352 @@
 		.sidebar-menu li {
 			font-size: 1rem;
 			padding: 16px 24px;
-			i {
+
+			i,
+			mat-icon {
 				margin-right: 12px;
 			}
-
 		}
-        .main-content {
-        margin: 0px 0px 0px 120px;
-        }
 	}
 }
+
 .topbar {
 	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
 	height: 64px;
-	background: #fff;
+	background: #ffffff;
 	border-bottom: 1px solid #e0e0e0;
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: center;
-	padding: 0 12px;
+	gap: 32px;
+	padding: 0 24px;
 	font-size: 1rem;
-	z-index: 1000;
-	.topbar-left, .topbar-center, .topbar-right {
+	z-index: 950;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+	.sidebar-logo {
 		display: flex;
 		align-items: center;
+		flex-shrink: 0;
+
+		.logo-image {
+			display: block;
+			height: 40px;
+			width: auto;
+		}
 	}
+
 	.topbar-left {
 		display: flex;
 		flex-direction: column;
-		align-items: start;
-		gap: 8px;
-		img {
-			height: 32px;
-			margin-right: 16px;
-			display: inline-block;
-		}
+		align-items: flex-start;
+		gap: 2px;
+		flex-shrink: 0;
+		min-width: 200px;
+
 		.customer-label {
-			color: #888;
-			font-size: 0.9rem;
-			margin-right: 2px;
+			color: var(--sv-text-muted, #6c7a92);
+			font-size: 0.7rem;
+			text-transform: uppercase;
+			letter-spacing: 0.08em;
+			font-weight: 600;
 		}
+
 		.customer-value {
-			font-weight: 500;
-			font-size: 1rem;
+			font-weight: 600;
+			font-size: 0.9rem;
+			color: var(--sv-text-strong, #1a2a3a);
+			line-height: 1.2;
 		}
 	}
-	.topbar-center1, .topbar-center2 {
-	display: flex;
+
+	.topbar-center1,
+	.topbar-center2 {
+		display: flex;
 		flex-direction: column;
-		align-items: start;
-		
-		gap: 8px;
-		
-		margin-left: 40px;
-		.facility-label, .view-label {
-			color: #888;
-			font-size: 0.9rem;
-		}
-		
-		.facility-dropdown, .view-dropdown {
-			min-width: 164px;
-			// font-size: 0.9rem;
-			// height: 50px;
+		align-items: flex-start;
+		gap: 4px;
+		flex-shrink: 0;
+
+		.facility-label,
+		.view-label {
+			color: var(--sv-text-muted, #6c7a92);
+			font-size: 0.7rem;
+			text-transform: uppercase;
+			letter-spacing: 0.08em;
+			font-weight: 600;
+			white-space: nowrap;
 		}
 	}
+
 	.topbar-right {
+		margin-left: auto;
+		display: flex;
+		align-items: center;
 		gap: 16px;
+		flex-shrink: 0;
+
 		.topbar-avatar {
-			    display: flex
-;
-    align-items: center;
-	justify-content: space-around;
-			background: var(--sv-blue-900);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 36px;
+			height: 36px;
+			border-radius: 50%;
+			background: var(--sv-blue-800, #0d355e);
 			color: #fff;
-			font-weight: 550;
-			font-size: 0.9rem;
+			font-weight: 600;
+			font-size: 0.85rem;
+			letter-spacing: 0.05em;
+			box-shadow: 0 2px 8px rgba(13, 53, 94, 0.2);
 		}
 	}
 }
 
 .main-content {
-    margin: 0px 0px 0px 30px !important;
-	padding: 56px 40px 40px 40px;
-	background: #f4f7fa;
+	margin: 0 0 0 60px !important;
+	padding: 80px 40px 40px 40px;
+	background: var(--sv-surface-muted, #f4f7fa);
 	min-height: 100vh;
 	transition: margin-left 0.2s cubic-bezier(.4,0,.2,1);
+}
+
+/* Modern PrimeNG dropdown styling */
+:host ::ng-deep .filter-control.p-component {
+	display: inline-flex;
+	align-items: center;
+	width: 100%;
+	max-width: 280px;
+	border-radius: 8px;
+	background: #ffffff;
+	border: 1px solid #e0e0e0;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+	transition: all 0.2s ease;
+	min-height: 36px;
+	padding: 0 4px 0 8px;
+}
+
+:host ::ng-deep .filter-control--multi.p-component {
+	max-width: 320px;
+}
+
+:host ::ng-deep .filter-control--single.p-component {
+	max-width: 240px;
+}
+
+:host ::ng-deep .filter-control.p-component:hover {
+	border-color: var(--sv-blue-600, #1976d2);
+	box-shadow: 0 2px 8px rgba(25, 118, 210, 0.12);
+}
+
+:host ::ng-deep .filter-control.p-component.p-focus {
+	border-color: var(--sv-blue-600, #1976d2);
+	box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+}
+
+:host ::ng-deep .filter-control .p-multiselect-label,
+:host ::ng-deep .filter-control .p-select-label {
+	font-size: 0.875rem;
+	font-weight: 500;
+	color: var(--sv-text-strong, #1a2a3a);
+	padding: 0 4px;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	line-height: 1.4;
+}
+
+:host ::ng-deep .filter-control.p-multiselect .p-multiselect-label-empty,
+:host ::ng-deep .filter-control.p-select .p-select-placeholder {
+	color: var(--sv-text-muted, #7a8aa2);
+	font-size: 0.875rem;
+	font-weight: 400;
+}
+
+:host ::ng-deep .filter-control .p-multiselect-chip {
+	background: var(--sv-blue-100, #e3f2fd);
+	color: var(--sv-blue-700, #135ba1);
+	border-radius: 6px;
+	padding: 3px 8px;
+	font-size: 0.8rem;
+	font-weight: 500;
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+}
+
+:host ::ng-deep .filter-control .p-multiselect-chip .p-multiselect-chip-icon {
+	font-size: 0.7rem;
+	margin-left: 2px;
+}
+
+:host ::ng-deep .filter-control .p-multiselect-trigger,
+:host ::ng-deep .filter-control .p-select-dropdown {
+	color: var(--sv-text-muted, #6c7a92);
+	transition: color 0.2s ease;
+	width: 2rem;
+}
+
+:host ::ng-deep .filter-control .p-select-clear-icon {
+	color: var(--sv-text-muted, #6c7a92);
+	font-size: 0.875rem;
+}
+
+:host ::ng-deep .filter-control .p-multiselect-trigger:hover,
+:host ::ng-deep .filter-control .p-select-dropdown:hover,
+:host ::ng-deep .filter-control .p-select-clear-icon:hover {
+	color: var(--sv-blue-700, #135ba1);
+}
+
+:host ::ng-deep .filter-panel.p-component {
+	border-radius: 8px;
+	border: 1px solid #e0e0e0;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+	padding: 4px 0;
+	background: #ffffff !important;
+	overflow: hidden;
+	z-index: 1200 !important;
+	margin-top: 4px !important;
+}
+
+:host ::ng-deep .p-multiselect-panel,
+:host ::ng-deep .p-select-panel {
+	background: #ffffff !important;
+}
+
+:host ::ng-deep .p-multiselect-panel .p-multiselect-items-wrapper,
+:host ::ng-deep .p-select-panel .p-select-items-wrapper {
+	background: #ffffff !important;
+}
+
+:host ::ng-deep .filter-panel--multi.p-component {
+	min-width: 320px !important;
+}
+
+:host ::ng-deep .filter-panel--single.p-component {
+	min-width: 240px !important;
+}
+
+:host ::ng-deep .filter-panel .p-multiselect-header {
+	padding: 8px 12px;
+	border-bottom: 1px solid #f0f0f0;
+	background: #fafafa;
+}
+
+:host ::ng-deep .filter-panel .p-multiselect-items,
+:host ::ng-deep .filter-panel .p-select-items {
+	padding: 4px;
+	display: grid;
+	gap: 2px;
+	max-height: 280px;
+	overflow-y: auto;
+}
+
+:host ::ng-deep .filter-panel .p-multiselect-item,
+:host ::ng-deep .filter-panel .p-select-option {
+	border-radius: 6px;
+	padding: 8px 12px;
+	font-size: 0.875rem;
+	font-weight: 500;
+	color: var(--sv-text-strong, #1a2a3a);
+	transition: all 0.15s ease;
+	cursor: pointer;
+}
+
+:host ::ng-deep .filter-panel .p-multiselect-item .p-checkbox {
+	margin-right: 10px;
+}
+
+:host ::ng-deep .filter-panel .p-multiselect-item.p-highlight,
+:host ::ng-deep .filter-panel .p-select-option.p-selected {
+	background: var(--sv-blue-50, #e3f2fd);
+	color: var(--sv-blue-700, #135ba1);
+}
+
+:host ::ng-deep .filter-panel .p-multiselect-item:not(.p-disabled):hover,
+:host ::ng-deep .filter-panel .p-select-option:not(.p-disabled):hover {
+	background: var(--sv-blue-50, #f5f5f5);
+	color: var(--sv-blue-700, #135ba1);
+}
+
+:host ::ng-deep .filter-panel .p-multiselect-filter-container {
+	padding: 8px 8px 4px;
+}
+
+:host ::ng-deep .filter-panel .p-multiselect-filter {
+	border-radius: 6px;
+	border: 1px solid #e0e0e0;
+	padding: 6px 12px;
+	font-size: 0.875rem;
+}
+
+:host ::ng-deep .filter-panel .p-multiselect-filter:focus {
+	border-color: var(--sv-blue-600, #1976d2);
+	box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+	outline: none;
+}
+
+/* Custom scrollbar for dropdown panels */
+:host ::ng-deep .filter-panel .p-multiselect-items::-webkit-scrollbar,
+:host ::ng-deep .filter-panel .p-select-items::-webkit-scrollbar {
+	width: 6px;
+}
+
+:host ::ng-deep .filter-panel .p-multiselect-items::-webkit-scrollbar-track,
+:host ::ng-deep .filter-panel .p-select-items::-webkit-scrollbar-track {
+	background: #f5f5f5;
+	border-radius: 3px;
+}
+
+:host ::ng-deep .filter-panel .p-multiselect-items::-webkit-scrollbar-thumb,
+:host ::ng-deep .filter-panel .p-select-items::-webkit-scrollbar-thumb {
+	background: #c0c0c0;
+	border-radius: 3px;
+}
+
+:host ::ng-deep .filter-panel .p-multiselect-items::-webkit-scrollbar-thumb:hover,
+:host ::ng-deep .filter-panel .p-select-items::-webkit-scrollbar-thumb:hover {
+	background: #a0a0a0;
+}
+
+@media (max-width: 1200px) {
+	.topbar {
+		gap: 20px;
+	}
+
+	.topbar-left {
+		min-width: 160px;
+	}
+}
+
+@media (max-width: 900px) {
+	.topbar {
+		flex-wrap: wrap;
+		gap: 16px;
+		height: auto;
+		padding: 12px 16px;
+	}
+
+	.topbar-left,
+	.topbar-center1,
+	.topbar-center2 {
+		min-width: 0;
+		flex: 1 1 calc(50% - 8px);
+	}
+
+	:host ::ng-deep .filter-control.p-component {
+		max-width: 100%;
+	}
+
+	.topbar-right {
+		width: 100%;
+		justify-content: flex-end;
+	}
+
+	.main-content {
+		padding: 140px 20px 20px 20px;
+	}
 }

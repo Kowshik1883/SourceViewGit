@@ -1,5 +1,9 @@
 import { Component, signal } from '@angular/core';
-import { FormControl } from '@angular/forms';
+
+interface DropdownOption {
+  label: string;
+  value: string;
+}
 
 @Component({
   selector: 'app-root',
@@ -9,19 +13,22 @@ import { FormControl } from '@angular/forms';
 })
 
 export class App {
-    toppings = new FormControl([]);
   protected readonly title = signal('SourceView');
-    facilities = [
+  readonly customerName = 'Ardent Health - Sports Medicine';
+
+  readonly facilities: DropdownOption[] = [
     { label: 'All Facilities', value: 'all' },
     { label: 'Ardent Health - Sports Medicine', value: 'ardent' },
     { label: 'St. Mary Hospital', value: 'stmary' },
     { label: 'General Hospital', value: 'general' }
   ];
-  selectedFacility = 'all';
-  views = [
+
+  readonly views: DropdownOption[] = [
     { label: 'Spend Analysis', value: 'spend' },
     { label: 'Savings Opportunities', value: 'savings' },
     { label: 'Vendor Comparison', value: 'vendor' }
   ];
-  selectedView = 'spend';
+
+  selectedFacilities = [this.facilities[0].value];
+  selectedView = this.views[0].value;
 }
