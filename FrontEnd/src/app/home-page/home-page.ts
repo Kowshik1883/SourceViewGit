@@ -15,8 +15,8 @@ export class HomePage {
   expandedInstrumentColumns = ['Instruments', 'DePuy Synthes', 'Zimmer Bonnet', 'Smith + Nephew', 'Medacta', 'Exactech', 'TOTAL'];
   // Expanded row data for instrument breakdown (mock)
   expandedInstrumentRowsQuantity = [
-    { label: 'Drill Bit', values: [80, 80, '', '', '', 80] },
-    { label: 'Guide Pin', values: [9, 403, 8, '', '', 421] },
+    { label: 'Drill Bit', values: [40,80, 80, '', '', '', 80] },
+    { label: 'Guide Pin', values: [69,9, 403, 8, '', '', 421] },
     { label: 'Trial', values: [16, '', '', '', 10, 26] },
     { label: 'Other Reusable Instruments', values: [95, 1493, 24, '', 55, 1697] }
   ];
