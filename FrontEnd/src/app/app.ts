@@ -31,4 +31,9 @@ export class App {
 
   selectedFacilities = [this.facilities[0].value];
   selectedView = this.views[0].value;
+  isSidebarCollapsed = true;
+
+  onSidebarCollapsed(collapsed: boolean): void {
+    this.isSidebarCollapsed = collapsed;
+  }
 }

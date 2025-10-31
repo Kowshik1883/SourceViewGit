@@ -1,13 +1,4 @@
-<nav class="custom-sidebar">
-	<ul class="sidebar-menu">
-		<li><i class="pi pi-bars"></i></li>
-		<div class="icons">
-			<li routerLink="/home" class="dashboardIcon"><mat-icon style="margin-right: 10px;">dashboard</mat-icon>Dashboard</li>
-			<li routerLink="/enter-pricing"><i class="pi pi-chart-bar"></i> Enter My Pricing</li>
-			<li><i class="pi pi-chart-line"></i> Insights</li>
-		</div>
-	</ul>
-</nav>
+<app-sidebar (collapsedChange)="onSidebarCollapsed($event)"></app-sidebar>
 <div class="topbar">
 	<div class="sidebar-logo">
 		<img src="assets/image.png" alt="Logo" class="logo-image" height="50" width="180" />
@@ -52,4 +43,6 @@
 		<div class="topbar-avatar">AB</div>
 	</div>
 </div>
-<div class="main-content"><router-outlet></router-outlet></div>
+<div class="main-content" [ngClass]="{'is-collapsed': isSidebarCollapsed}">
+	<router-outlet></router-outlet>
+</div>

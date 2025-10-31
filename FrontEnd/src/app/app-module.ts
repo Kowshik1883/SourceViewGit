@@ -22,14 +22,15 @@ import { App } from './app';
 import { HomePage } from './home-page/home-page';
 import {MatIconModule} from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { EnterPricing } from './enter-pricing/enter-pricing';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     App,
     HomePage,
-    EnterPricing
+    EnterPricing,
+    SidebarComponent
   ],
   imports: [
     CardModule,

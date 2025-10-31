@@ -1,9 +1,5 @@
 // Responsive styles
 @media (max-width: 900px) {
-	.main-content {
-		margin-left: 0;
-		padding: 24px 10px 24px 10px;
-	}
 	.card-container {
 		gap: 18px;
 	}
@@ -25,9 +21,6 @@
 	}
 	.page-title-note-group {
 		align-items: flex-start;
-	}
-	.main-content {
-		padding: 12px 2px 12px 2px;
 	}
 	.card-title, .card-subtitle, .manufacturer-title, .manufacturer-subtitle {
 		font-size: 1rem;
@@ -178,71 +171,6 @@
 }
 
 // Sidebar beneath navbar
-.custom-sidebar {
-	position: fixed;
-	top: 64px; // height of navbar
-	left: 0;
-	width: 60px;
-	height: calc(100vh - 64px);
-	background: #f8fafc;
-	border-right: 1px solid #e0e0e0;
-	z-index: 900;
-	display: flex;
-	flex-direction: column;
-	transition: width 0.2s cubic-bezier(.4,0,.2,1);
-
-	.sidebar-logo {
-		text-align: center;
-		margin: 24px 0 32px 0;
-		transition: opacity 0.2s;
-		opacity: 0;
-	}
-	.sidebar-menu {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		flex: 1;
-		li {
-			display: flex;
-			width: 100%;
-			align-items: center;
-			font-size: 0;
-			padding: 16px 12px;
-			color: #34495e;
-			cursor: pointer;
-			white-space: nowrap;
-            // justify-content: center;
-			i {
-				margin-right: 0;
-				font-size: 1.4rem;
-				transition: margin-right 0.2s;
-			}
-			&:hover {
-				background: var(--sv-blue-100);
-                
-			}
-		}
-	}
-
-	&:hover {
-		width: 220px;
-		.sidebar-logo {
-			opacity: 1;
-		}
-
-		.sidebar-menu li {
-			font-size: 1rem;
-			padding: 16px 24px;
-			i {
-				margin-right: 12px;
-			}
-
-		}
-        .main-content {
-        margin: 0px 0px 0px 120px;
-        }
-	}
-}
 
 // Fixed Topbar
 
@@ -251,9 +179,6 @@
 	display:flex; align-items:center; justify-content:space-between;
 }
 
-.custom-sidebar:hover ~ .main-content {
-	margin-left: 220px;
-}
 
 
 // Card container for dashboard charts
@@ -402,27 +327,15 @@
 	background: #f4f7fa;
 }
 
-.main-content {
-	margin-left: 220px;
-	padding: 96px 40px 40px 40px;
-	background: #f4f7fa;
-	min-height: 100vh;
-}
 .card-subtitle{
 	font-size:0.9rem; color:#555;margin-top: 5px;
 }
 .breadcrumb {
 	font-size: 0.85rem;
-    margin-top: 51px;
+    margin-top: 45px;
 }
 .card-title{
 	font-size:1.15rem; font-weight:600; color:#222;
-}
-.main-content {
-	margin-left: 260px;
-	padding: 32px 40px 40px 40px;
-	background: #f4f7fa;
-	min-height: 100vh;
 }
 
 .page-title {
