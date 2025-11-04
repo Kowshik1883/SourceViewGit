@@ -12,6 +12,62 @@ import { FormControl } from '@angular/forms';
   standalone: false,
 })
 export class HomePage {
+  // Toggle for Spend/Segment view
+  isSpendView: boolean = true;
+
+  // Segment Table Data (mock)
+  segmentTableData = [
+    {
+      segmentName: 'Segment A',
+      netPrice: '$10,000,000', instrumentSpend: '$100,000', dpsNoEquivalent: '$50,000', proposedSpend: '$8,000,000', savings: 2000000,
+      expanded: false,
+      vendors: [
+        { vendor: 'Vendor 1A', netPrice: '$2,000,000', instrumentSpend: '$20,000', dpsNoEquivalent: '$10,000', proposedSpend: '$1,600,000', savings: 400000 },
+        { vendor: 'Vendor 2A', netPrice: '$3,000,000', instrumentSpend: '$30,000', dpsNoEquivalent: '$15,000', proposedSpend: '$2,400,000', savings: 600000 },
+        { vendor: 'Vendor 3A', netPrice: '$5,000,000', instrumentSpend: '$50,000', dpsNoEquivalent: '$25,000', proposedSpend: '$4,000,000', savings: 1000000 },
+      ]
+    },
+    {
+      segmentName: 'Segment B',
+      netPrice: '$8,500,000', instrumentSpend: '$85,000', dpsNoEquivalent: '$42,500', proposedSpend: '$7,000,000', savings: 1500000,
+      expanded: false,
+      vendors: [
+        { vendor: 'Vendor 1B', netPrice: '$2,500,000', instrumentSpend: '$25,000', dpsNoEquivalent: '$12,500', proposedSpend: '$2,000,000', savings: 500000 },
+        { vendor: 'Vendor 2B', netPrice: '$3,500,000', instrumentSpend: '$35,000', dpsNoEquivalent: '$17,500', proposedSpend: '$2,800,000', savings: 700000 },
+        { vendor: 'Vendor 3B', netPrice: '$2,500,000', instrumentSpend: '$25,000', dpsNoEquivalent: '$12,500', proposedSpend: '$2,200,000', savings: 300000 },
+      ]
+    },
+    {
+      segmentName: 'Segment C',
+      netPrice: '$6,200,000', instrumentSpend: '$62,000', dpsNoEquivalent: '$31,000', proposedSpend: '$5,000,000', savings: 1200000,
+      expanded: false,
+      vendors: [
+        { vendor: 'Vendor 1C', netPrice: '$2,200,000', instrumentSpend: '$22,000', dpsNoEquivalent: '$11,000', proposedSpend: '$1,800,000', savings: 400000 },
+        { vendor: 'Vendor 2C', netPrice: '$2,000,000', instrumentSpend: '$20,000', dpsNoEquivalent: '$10,000', proposedSpend: '$1,600,000', savings: 400000 },
+        { vendor: 'Vendor 3C', netPrice: '$2,000,000', instrumentSpend: '$20,000', dpsNoEquivalent: '$10,000', proposedSpend: '$1,600,000', savings: 400000 },
+      ]
+    },
+    {
+      segmentName: 'Segment D',
+      netPrice: '$5,000,000', instrumentSpend: '$50,000', dpsNoEquivalent: '$25,000', proposedSpend: '$4,000,000', savings: 1000000,
+      expanded: false,
+      vendors: [
+        { vendor: 'Vendor 1D', netPrice: '$1,500,000', instrumentSpend: '$15,000', dpsNoEquivalent: '$7,500', proposedSpend: '$1,200,000', savings: 300000 },
+        { vendor: 'Vendor 2D', netPrice: '$2,000,000', instrumentSpend: '$20,000', dpsNoEquivalent: '$10,000', proposedSpend: '$1,600,000', savings: 400000 },
+        { vendor: 'Vendor 3D', netPrice: '$1,500,000', instrumentSpend: '$15,000', dpsNoEquivalent: '$7,500', proposedSpend: '$1,200,000', savings: 300000 },
+      ]
+    },
+    {
+      segmentName: 'Segment E',
+      netPrice: '$4,000,000', instrumentSpend: '$40,000', dpsNoEquivalent: '$20,000', proposedSpend: '$3,200,000', savings: 800000,
+      expanded: false,
+      vendors: [
+        { vendor: 'Vendor 1E', netPrice: '$1,000,000', instrumentSpend: '$10,000', dpsNoEquivalent: '$5,000', proposedSpend: '$800,000', savings: 200000 },
+        { vendor: 'Vendor 2E', netPrice: '$2,000,000', instrumentSpend: '$20,000', dpsNoEquivalent: '$10,000', proposedSpend: '$1,600,000', savings: 400000 },
+        { vendor: 'Vendor 3E', netPrice: '$1,000,000', instrumentSpend: '$10,000', dpsNoEquivalent: '$5,000', proposedSpend: '$800,000', savings: 200000 },
+      ]
+    }
+  ];
   expandedInstrumentColumns = ['Instruments', 'DePuy Synthes', 'Zimmer Bonnet', 'Smith + Nephew', 'Medacta', 'Exactech', 'TOTAL'];
   // Expanded row data for instrument breakdown (mock)
   expandedInstrumentRowsQuantity = [

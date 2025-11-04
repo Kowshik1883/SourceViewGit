@@ -70,9 +70,20 @@
 					</div>
 		</p-card>
 	</div>
+
 	<p-card class="dashboard-card">
-		<div class="card-title" style="font-size:1.15rem; font-weight:600; color:#222;">Vendor Spend &amp; Savings Summary</div>
-	<div class="card-subtitle" style="font-size:0.9rem; color:#555;margin-top: 5px;">This table summarizes vendor spend, instrument costs, DPS equivalents, proposed spend, and total savings based on current and DPS pricing.</div>
+		<div style="display: flex; justify-content: space-between; align-items: center;">
+			<div class="card-title" style="font-size:1.15rem; font-weight:600; color:#222;">Vendor Spend & Savings Summary</div>
+			<div>
+				<div class="label-toggle-group" [class.segment]="!isSpendView" style="margin-bottom:8px;">
+					<span class="label-toggle" [class.active]="isSpendView" (click)="isSpendView = !isSpendView">Spend</span>
+					<span class="label-toggle" [class.active]="!isSpendView" (click)="isSpendView = !isSpendView">Segment</span>
+					<span class="label-toggle-slider" [style.left]="isSpendView ? '4px' : '64px'"></span>
+				</div>
+			</div>
+		</div>
+		<div class="card-subtitle" style="font-size:0.9rem; color:#555;margin-top: 5px;">This table summarizes vendor spend, instrument costs, DPS equivalents, proposed spend, and total savings based on current and DPS pricing.</div>
+		<ng-container *ngIf="isSpendView">
 			<p-table [value]="vendorTableData" class="vendor-table" style="font-size:1rem; border: 0.5px solid rgb(221, 216, 216);font-weight: 500;">
 				<ng-template pTemplate="header">
 					<tr>
@@ -81,7 +92,6 @@
 						<th colspan="3" style="font-size:1rem; background:var(--sv-blue-800); color:#fff; text-align:center;font-size: 0.9rem;">Proposed DPS Pricing - Discount 63%</th>
 					</tr>
 					<tr>
-						
 						<th  pSortableColumn="netPrice">Net Price <p-sortIcon field="netPrice"></p-sortIcon></th>
 						<th pSortableColumn="instrumentSpend">Instrument Spend <p-sortIcon field="instrumentSpend"></p-sortIcon></th>
 						<th  pSortableColumn="dpsNoEquivalent">DPS No Equivalent <p-sortIcon field="dpsNoEquivalent"></p-sortIcon></th>
@@ -104,6 +114,72 @@
 					</tr>
 				</ng-template>
 			</p-table>
+		</ng-container>
+		<ng-container *ngIf="!isSpendView">
+			<p-table [value]="segmentTableData" class="vendor-table" style="font-size:1rem; border: 0.5px solid rgb(221, 216, 216);font-weight: 500;" [rowExpandMode]="'single'">
+				<ng-template pTemplate="header">
+					<tr>
+						<th rowspan="2" class="vendorHeader">Segment</th>
+						<th colspan="2" style="font-size:1rem; background:var(--sv-blue-800); color:#fff; text-align:center;font-size: 0.9rem;">Current Spend</th>
+						<th colspan="3" style="font-size:1rem; background:var(--sv-blue-800); color:#fff; text-align:center;font-size: 0.9rem;">Proposed DPS Pricing - Discount 63%</th>
+					</tr>
+					<tr>
+						<th pSortableColumn="netPrice">Net Price <p-sortIcon field="netPrice"></p-sortIcon></th>
+						<th pSortableColumn="instrumentSpend">Instrument Spend <p-sortIcon field="instrumentSpend"></p-sortIcon></th>
+						<th pSortableColumn="dpsNoEquivalent">DPS No Equivalent <p-sortIcon field="dpsNoEquivalent"></p-sortIcon></th>
+						<th pSortableColumn="proposedSpend">Proposed Spend <p-sortIcon field="proposedSpend"></p-sortIcon></th>
+						<th pSortableColumn="savings">Total Savings <p-sortIcon field="savings"></p-sortIcon></th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-rowData let-expanded="expanded">
+					<tr>
+						<td style="font-weight:600;"> 
+							<button pButton type="button" icon="pi pi-chevron-down" style="font-size: 0.9rem;" (click)="rowData.expanded = !rowData.expanded" [ngClass]="{'p-button-text': true, 'p-button-rounded': true}" [ngStyle]="{'transform': rowData.expanded ? 'rotate(180deg)' : 'none'}"></button>
+							{{rowData.segmentName}}
+						</td>
+						<td>{{rowData.netPrice}}</td>
+						<td>{{rowData.instrumentSpend}}</td>	
+						<td>{{rowData.dpsNoEquivalent}}</td>
+						<td>{{rowData.proposedSpend}}</td>
+						<td style="font-weight:bold;">
+							<span [ngStyle]="{'color': rowData.savings < 0 ? '#d32f2f' : '#388e3c'}">
+								${{rowData.savings | number}}
+							</span>
+						</td>
+					</tr>
+					<tr *ngIf="rowData.expanded" class="expanded-row">
+						<td colspan="7" style="margin: 30%; background:#f5f7fa;">
+							<table style="width:100%; border:1px solid black;text-align: center;">
+								<thead>
+									<tr>
+										<th style="font-size:0.9rem; ">Vendor</th>
+										<th style="font-size:0.9rem; ">Net Price</th>
+										<th style="font-size:0.9rem; ">Instrument Spend</th>
+										<th style="font-size:0.9rem; ">DPS No Equivalent</th>
+										<th style="font-size:0.9rem; ">Proposed Spend</th>
+										<th style="font-size:0.9rem; ">Total Savings</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let vendor of rowData.vendors" class="vendor-table-row">
+										<td style="font-weight:500; background:#fff; color:#222; font-size:0.9rem; padding: 12px 16px; border-bottom: 1px solid #e0e0e0;">{{vendor.vendor}}</td>
+										<td style="background:#fff; color:#222; font-size:0.9rem; padding: 12px 16px; border-bottom: 1px solid #e0e0e0;">{{vendor.netPrice}}</td>
+										<td style="background:#fff; color:#222; font-size:0.9rem; padding: 12px 16px; border-bottom: 1px solid #e0e0e0;">{{vendor.instrumentSpend}}</td>
+										<td style="background:#fff; color:#222; font-size:0.9rem; padding: 12px 16px; border-bottom: 1px solid #e0e0e0;">{{vendor.dpsNoEquivalent}}</td>
+										<td style="background:#fff; color:#222; font-size:0.9rem; padding: 12px 16px; border-bottom: 1px solid #e0e0e0;">{{vendor.proposedSpend}}</td>
+										<td style="background:#fff; color:#222; font-size:0.9rem; padding: 12px 16px; border-bottom: 1px solid #e0e0e0; font-weight:bold;">
+											<span [ngStyle]="{'color': vendor.savings < 0 ? '#d32f2f' : '#388e3c'}">
+												${{vendor.savings | number}}
+											</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+				</ng-template>
+			</p-table>
+		</ng-container>
 	</p-card>
     <p-card class="dashboard-card" >
 	<div class="card-title" style="font-size:1.15rem; font-weight:600; color:#1a2a3a; margin-bottom:2px;margin-top: 5px;">All Manufacturers: Items for Review</div>
