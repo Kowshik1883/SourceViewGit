@@ -25,13 +25,15 @@ import {MatIconModule} from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EnterPricing } from './enter-pricing/enter-pricing';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { Dashboard } from './dashboard/dashboard';
 
 @NgModule({
   declarations: [
     App,
     HomePage,
     EnterPricing,
-    SidebarComponent
+    SidebarComponent,
+    Dashboard
   ],
   imports: [
     CardModule,
