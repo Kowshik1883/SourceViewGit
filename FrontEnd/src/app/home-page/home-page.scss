@@ -1,3 +1,395 @@
+/* JNJ highlight with left accent bar */
+:host ::ng-deep .vendor-table tr.jnj-row,
+:host ::ng-deep .vendor-table tr.jnj-row td,
+:host ::ng-deep .vendor-table tr.jnj-row:hover td {
+	background: #FFFBEA !important; /* soft warm highlight */
+	color: #222 !important; /* reset text color */
+	// border-bottom: 2px solid #ffeea0 !important; /* warm accent border */
+}
+:host ::ng-deep .vendor-table tr.jnj-row td:first-child {
+	position: relative;
+	padding-left: 28px; /* space for accent bar */
+}
+:host ::ng-deep .vendor-table tr.jnj-row td:first-child::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 6px; /* slim accent */
+	background: linear-gradient(180deg,#FFa389 0%, #FFa389 100%);
+	border-radius: 0 4px 4px 0;
+	box-shadow: 1px 0 2px rgba(0,0,0,0.08);
+}
+/* Remove all blur effects */
+// .tw-blur-bg, body.tw-blur-bg, .p-dialog-mask, .p-dialog {
+//   filter: none !important;
+//   backdrop-filter: none !important;
+//   background: none !important;
+//   transition: none !important;
+//   z-index: auto;
+// }
+
+.tw-modal-dialog .p-dialog-content {
+	background: #f8fafc;
+	color: #222;
+	padding: 0;
+	border-radius: 16px;
+}
+.tw-modal-dialog .p-dialog {
+	border-radius: 16px;
+	box-shadow: 0 4px 32px 0 rgba(0,0,0,0.08);
+}
+.tw-modal-dialog .p-dialog-header {
+	background: #f8fafc;
+	border-radius: 16px 16px 0 0;
+	border-bottom: none;
+}
+// Spend Breakdown Modal Styles
+.tw-modal {
+	font-family: 'Inter', sans-serif;
+	padding: 0;
+	background: transparent;
+}
+.tw-modal-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	border-bottom: 1px solid #E5E7EB;
+	padding: 24px 24px 0 24px;
+}
+.tw-modal-header h3 {
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: #222;
+}
+.tw-modal-close {
+	height: 32px;
+	width: 32px;
+	border-radius: 50%;
+	background: #E5E7EB;
+	color: #222;
+	border: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+.tw-modal-close i {
+	font-size: 1.25rem;
+}
+.tw-modal-content {
+	padding: 24px;
+}
+.tw-modal-stats-row {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 16px;
+	margin-bottom: 24px;
+}
+.tw-modal-stat {
+	background: #fff;
+	border-radius: 8px;
+	border: 1px solid #E5E7EB;
+	padding: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+.tw-modal-stat-label {
+	font-size: 0.95rem;
+	font-weight: 500;
+	color: #555;
+}
+.tw-modal-stat-value {
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: #222;
+}
+.tw-modal-charts-row {
+	display: grid;
+	grid-template-columns: 2fr 3fr;
+	gap: 24px;
+}
+.tw-modal-chart {
+	background: #fff;
+	border-radius: 8px;
+	border: 1px solid #E5E7EB;
+	padding: 24px;
+	display: flex;
+	flex-direction: column;
+}
+.tw-modal-chart-contribution {
+	align-items: center;
+}
+.tw-modal-chart-label {
+	font-size: 1rem;
+	font-weight: 600;
+	color: #222;
+	margin-bottom: 12px;
+}
+.tw-modal-chart-bar {
+	width: 180px !important;
+	height: 180px !important;
+}
+.tw-modal-chart-vendor {
+	display: flex;
+	flex-direction: column;
+}
+.tw-modal-vendor-row {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 16px;
+}
+.tw-modal-vendor-dot {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	display: inline-block;
+}
+.tw-modal-vendor-name {
+	flex-grow: 1;
+	font-size: 0.95rem;
+	font-weight: 500;
+	color: #222;
+}
+.tw-modal-vendor-percent {
+	font-size: 0.95rem;
+	color: #555;
+	width: 40px;
+}
+.tw-modal-vendor-bar-bg {
+	flex: 1;
+	height: 8px;
+	background: #E5E7EB;
+	border-radius: 4px;
+	position: relative;
+}
+.tw-modal-vendor-bar {
+	height: 8px;
+	border-radius: 4px;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.tw-modal-vendor-value {
+	width: 70px;
+	text-align: right;
+	font-size: 0.95rem;
+	font-weight: 700;
+	color: #222;
+}
+// Spend Breakdown Modal Styles
+.tw-modal {
+	font-family: 'Inter', sans-serif;
+	padding: 0;
+	background: transparent;
+}
+.tw-modal-header {
+	    background: #0d354e;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	border-bottom: 1px solid #E5E7EB;
+	padding: 2px 24px 0 24px;
+}
+.tw-modal-header h3 {
+	font-size: 1.25rem;
+    font-weight: 700;
+    color: #cdcdcd;
+}
+.tw-modal-close {
+	height: 32px;
+	width: 32px;
+	border-radius: 50%;
+	background: #E5E7EB;
+	color: #222;
+	border: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+.tw-modal-close i {
+	font-size: 1.25rem;
+}
+.tw-modal-content {
+	background-color: #f2f2f2;
+	padding: 24px;
+}
+.tw-modal-stats-row {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 16px;
+	margin-bottom: 24px;
+}
+.tw-modal-stat {
+background: #fff;
+    border-radius: 8px;
+    border: 1px solid #c7c7c7;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.tw-modal-stat-label {
+	font-size: 0.95rem;
+	font-weight: 500;
+	color: #555;
+}
+.tw-modal-stat-value {
+font-size: 1.2rem;
+    font-weight: 700;
+    color: #222;
+}
+.tw-modal-charts-row {
+	display: grid;
+	grid-template-columns: 2fr 3fr;
+	gap: 24px;
+}
+.tw-modal-chart {
+	background: #fff;
+	border-radius: 8px;
+	border: 1px solid #E5E7EB;
+	padding: 24px;
+	display: flex;
+	flex-direction: column;
+}
+.tw-modal-chart-contribution {
+	align-items: center;
+}
+.tw-modal-chart-label {
+	font-size: 1rem;
+	font-weight: 600;
+	color: #222;
+	margin-bottom: 12px;
+}
+.tw-modal-chart-bar {
+	width: 180px !important;
+	height: 180px !important;
+}
+.tw-modal-chart-overlay {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 1.1rem;
+	font-weight: 700;
+	color: #222;
+	text-align: center;
+}
+.tw-modal-chart-overlay-label {
+	font-size: 0.85rem;
+	color: #555;
+}
+.tw-modal-chart-overlay-value {
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: #222;
+}
+.tw-modal-chart-vendor {
+	display: flex;
+	flex-direction: column;
+}
+.tw-modal-vendor-row {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 16px;
+}
+.tw-modal-vendor-dot {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	display: inline-block;
+}
+.tw-modal-vendor-name {
+flex-grow: 1;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #222;
+}
+.tw-modal-vendor-percent {
+	font-size: 0.95rem;
+	color: #555;
+	width: 40px;
+}
+.tw-modal-vendor-bar-bg {
+	flex: 1;
+	height: 8px;
+	background: #E5E7EB;
+	border-radius: 4px;
+	position: relative;
+}
+.tw-modal-vendor-bar {
+	height: 8px;
+	border-radius: 4px;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.tw-modal-vendor-value {
+	width: 70px;
+	text-align: right;
+	font-size: 0.85rem;
+	font-weight: 700;
+	color: #222;
+}
+.tw-modal-insight-row {
+	margin-top: 24px;
+	display: flex;
+	align-items: start;
+	gap: 12px;
+	background: #137fec1a;
+	border-radius: 8px;
+	padding: 16px;
+}
+.tw-modal-insight-icon {
+	color: #137fec;
+	font-size: 1.3rem;
+	margin-top: 2px;
+}
+.tw-modal-insight-text {
+	font-size: 0.95rem;
+	color: #222;
+}
+.tw-modal-insight-bold {
+	font-weight: 700;
+}
+.tw-modal-actions-row {
+	margin-top: 24px;
+	display: flex;
+	justify-content: end;
+	gap: 12px;
+	border-top: 1px solid #E5E7EB;
+	padding-top: 16px;
+}
+.tw-modal-action {
+	height: 40px;
+	min-width: 84px;
+	border-radius: 8px;
+	border: none;
+	font-size: 0.95rem;
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	cursor: pointer;
+}
+.tw-modal-action-csv {
+	background: #E5E7EB;
+	color: #222;
+}
+.tw-modal-action-img {
+	background: #137fec;
+	color: #fff;
+}
+.tw-modal-action-icon {
+	font-size: 1.1rem;
+}
 // Responsive styles
 @media (max-width: 900px) {
 	.card-container {
@@ -323,9 +715,7 @@
 .vendor-table tr, .manufacture-table tr {
 	transition: background 0.2s;
 }
-.vendor-table tr:hover td, .manufacture-table tr:hover td {
-	background: #f4f7fa;
-}
+
 
 .card-subtitle{
 	font-size:0.9rem; color:#555;margin-top: 5px;
@@ -531,4 +921,38 @@
 .expanded-metric-table tr:hover td,
 .segment-expanded-table tr:hover td {
   background: #f4f7fa;
+}
+
+/* Fullscreen popup styles */
+.fullscreen-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(29, 173, 209, 0.98);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.popup-content {
+  position: relative;
+  max-width: 600px;
+  width: 90vw;
+  background: none;
+  padding: 48px 32px 32px 32px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  text-align: center;
+}
+.close-popup {
+  position: absolute;
+  top: 24px;
+  right: 32px;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
 }

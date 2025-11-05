@@ -16,10 +16,56 @@
 				<div class="chart-card">
 					<div class="chart-header">
 						<span class="chart-title">Current (Est) Spend</span>
-						<span  pTooltip="This chart shows the estimated current spend across vendors." tooltipPosition="top">
-							<button pButton pRipple icon="pi pi-question-circle" class="p-button-text p-button-rounded"></button>
+						<span>
+							<button (click)="openChartDialog('Current (Est) Spend', 'View overall spend and savings across vendors, with a focus on the top 5 vendors based on spend.', '$53.1M', 'bar', currentSpendChartData, barChartOptions, 'null', '#1dadd1')" class="p-button-text p-button-rounded" style="background:none; border:none; cursor:pointer;">
+								<i class="pi pi-external-link" style="font-size:1.1rem; color:var(--sv-blue-500);"></i>
+							</button>
 						</span>
 					</div>
+					<p-dialog [(visible)]="showChartDialog" [modal]="true" [style]="{width: '900px', maxWidth: '98vw'}" class="tw-modal-dialog" [baseZIndex]="9999" (onShow)="dialogOpened=true" (onHide)="dialogOpened=false">
+  	<div class="breakdown-modal tw-modal">
+    <div class="tw-modal-header">
+      <h3>Current (Est) Spend Breakdown</h3>
+      <button (click)="showChartDialog=false" class="tw-modal-close">
+        <i class="pi pi-times"></i>
+      </button>
+    </div>
+    <div class="tw-modal-content">
+      <div class="tw-modal-stats-row">
+        <div class="tw-modal-stat">
+          <span class="tw-modal-stat-label">Total Current Spend</span>
+          <span class="tw-modal-stat-value">{{getCurrentSpendTotal()}}</span>
+        </div>
+        <div class="tw-modal-stat">
+          <span class="tw-modal-stat-label">Top Vendor by Current Spend</span>
+          <span class="tw-modal-stat-value">{{getTopVendorName()}}</span>
+        </div>
+        <div class="tw-modal-stat">
+          <span class="tw-modal-stat-label">Number of Vendors</span>
+          <span class="tw-modal-stat-value">{{getVendorCount()}} Active Vendors</span>
+        </div>
+      </div>
+      <div class="tw-modal-charts-row">
+        <div class="tw-modal-chart tw-modal-chart-contribution">
+          <span class="tw-modal-chart-label">Spend Contribution</span>
+          <p-chart type="bar" [data]="currentSpendChartData" [options]="barChartOptions" class="tw-modal-chart-bar"></p-chart>
+        </div>
+        <div class="tw-modal-chart tw-modal-chart-vendor">
+          <span class="tw-modal-chart-label">Spend by Vendor</span>
+          <div *ngFor="let ds of currentSpendChartData.datasets" class="tw-modal-vendor-row">
+            <span class="tw-modal-vendor-dot" [ngStyle]="{'background': ds.backgroundColor}"></span>
+            <span class="tw-modal-vendor-name">{{ds.label}}</span>
+            <span class="tw-modal-vendor-percent"></span>
+            <div class="tw-modal-vendor-bar-bg">
+              <div class="tw-modal-vendor-bar" [ngStyle]="{'width': getVendorPercent(ds) + '%', 'background': ds.backgroundColor}"></div>
+            </div>
+            <span class="tw-modal-vendor-value">${{ds.data[0] | number:'1.1-1'}}M </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  	</div>
+</p-dialog>
 					<div class="chart-content">
 						<div class="chart-value">$53.1M</div>
 						<p-chart type="bar" [data]="currentSpendChartData" [options]="barChartOptions"></p-chart>
@@ -28,8 +74,10 @@
 				<div class="chart-card">
 					<div class="chart-header">
 						<span class="chart-title">Proposed Spend</span>
-						<span  pTooltip="This chart shows the proposed spend after DPS pricing." tooltipPosition="top">
-							<button pButton pRipple icon="pi pi-question-circle" class="p-button-text p-button-rounded"></button>
+						<span pTooltip="This chart shows the proposed spend after DPS pricing." tooltipPosition="top">
+							<button (click)="showProposedSpendDialog=true" class="p-button-text p-button-rounded" style="background:none; border:none; cursor:pointer;">
+								<i class="pi pi-external-link" style="font-size:1.1rem; color:var(--sv-blue-500);"></i>
+							</button>
 						</span>
 					</div>
 					<div class="chart-content">
@@ -41,7 +89,9 @@
 					<div class="chart-header">
 						<span class="chart-title">Estimated Savings</span>
 						<span  pTooltip="This chart shows the estimated savings after DPS pricing." tooltipPosition="top">
-							<button pButton pRipple icon="pi pi-question-circle" class="p-button-text p-button-rounded"></button>
+							<button (click)="showSavingsDialog=true" class="p-button-text p-button-rounded" style="background:none; border:none; cursor:pointer;">
+								<i class="pi pi-external-link" style="font-size:1.1rem; color:var(--sv-blue-500);"></i>
+							</button>
 						</span>
 					</div>
 					<div class="chart-content">
@@ -54,7 +104,9 @@
 					<div class="chart-header">
 						<span class="chart-title">Vendor Share at Proposed DPS Pricing</span>
 						<span  pTooltip="This chart shows the vendor share at proposed DPS pricing." tooltipPosition="top">
-							<button pButton pRipple icon="pi pi-question-circle" class="p-button-text p-button-rounded"></button>
+							<button (click)="showVendorShareDialog=true" class="p-button-text p-button-rounded" style="background:none; border:none; cursor:pointer;">
+								<i class="pi pi-external-link" style="font-size:1.1rem; color:var(--sv-blue-500);"></i>
+							</button>
 						</span>
 					</div>
 					<div class="chart-content">
@@ -100,7 +152,7 @@
 					</tr>
 				</ng-template>
 				<ng-template pTemplate="body" let-rowData>
-					<tr>
+					<tr [class.jnj-row]="rowData.isJnJ">
 						<td>{{rowData.vendor}}</td>
 						<td>{{rowData.netPrice}}</td>
 						<td>{{rowData.instrumentSpend}}</td>
@@ -186,8 +238,8 @@
 	<div class="card-subtitle" style="font-size:0.9rem; color:#555; margin-bottom:10px;">Description of data table below. Review instrument quantity and price per case for each manufacturer. Colored dots indicate if values are above target thresholds.</div>
 	<div style="display:flex; align-items:end; margin-bottom:8px;justify-content: flex-end;">
 		<span style="font-size:0.9rem; margin-right:16px;">Target Threshold:</span>
-		<span style="display:inline-flex; align-items:center; margin-right:12px;font-size: 0.9rem;"><span style="width:14px; height:14px; background:#FFC107;  display:inline-block; margin-right:4px;"></span>5-10% above target</span>
-		<span style="display:inline-flex; align-items:center; margin-right:12px;font-size: 0.9rem;"><span style="width:14px; height:14px; background:#B71C1C;  display:inline-block; margin-right:4px;"></span>> 10% above target</span>
+		<span style="display:inline-flex; align-items:center; margin-right:12px;font-size: 0.9rem;"><span style="width:14px; height:14px; background:#FFC107;border-radius: 50%;  display:inline-block; margin-right:4px;"></span>5-10% above target</span>
+		<span style="display:inline-flex; align-items:center; margin-right:12px;font-size: 0.9rem;"><span style="width:14px; height:14px; background:#B71C1C; border-radius: 50%; display:inline-block; margin-right:4px;"></span>> 10% above target</span>
 	</div>
 	<p-table [value]="manufacturerTableData" class="manufacture-table" style="font-size:0.9rem;border: 0.5px solid rgb(221, 216, 216);" [rowExpandMode]="'single'">
 		<ng-template pTemplate="header">
@@ -256,6 +308,181 @@
 		</ng-template>
 	</p-table>
 </p-card>
+<!-- All dialogs should be outside the blur wrapper -->
+<p-dialog [(visible)]="showChartDialog" [modal]="true" [style]="{width: '900px', maxWidth: '98vw'}" class="tw-modal-dialog" [baseZIndex]="9999" (onShow)="dialogOpened=true" (onHide)="dialogOpened=false">
+  	<div class="breakdown-modal tw-modal">
+    <div class="tw-modal-header">
+      <h3>Current (Est) Spend Breakdown</h3>
+      <button (click)="showChartDialog=false" class="tw-modal-close">
+        <i class="pi pi-times"></i>
+      </button>
+    </div>
+    <div class="tw-modal-content">
+      <div class="tw-modal-stats-row">
+        <div class="tw-modal-stat">
+          <span class="tw-modal-stat-label">Total Current Spend</span>
+          <span class="tw-modal-stat-value">{{getCurrentSpendTotal()}}</span>
+        </div>
+        <div class="tw-modal-stat">
+          <span class="tw-modal-stat-label">Top Vendor by Current Spend</span>
+          <span class="tw-modal-stat-value">{{getTopVendorName()}}</span>
+        </div>
+        <div class="tw-modal-stat">
+          <span class="tw-modal-stat-label">Number of Vendors</span>
+          <span class="tw-modal-stat-value">{{getVendorCount()}} Active Vendors</span>
+        </div>
+      </div>
+      <div class="tw-modal-charts-row">
+        <div class="tw-modal-chart tw-modal-chart-contribution">
+          <span class="tw-modal-chart-label">Spend Contribution</span>
+          <p-chart type="bar" [data]="currentSpendChartData" [options]="barChartOptions" class="tw-modal-chart-bar"></p-chart>
+        </div>
+        <div class="tw-modal-chart tw-modal-chart-vendor">
+          <span class="tw-modal-chart-label">Spend by Vendor</span>
+          <div *ngFor="let ds of currentSpendChartData.datasets" class="tw-modal-vendor-row">
+            <span class="tw-modal-vendor-dot" [ngStyle]="{'background': ds.backgroundColor}"></span>
+            <span class="tw-modal-vendor-name">{{ds.label}}</span>
+            <span class="tw-modal-vendor-percent"></span>
+            <div class="tw-modal-vendor-bar-bg">
+              <div class="tw-modal-vendor-bar" [ngStyle]="{'width': getVendorPercent(ds) + '%', 'background': ds.backgroundColor}"></div>
+            </div>
+            <span class="tw-modal-vendor-value">${{ds.data[0] | number:'1.1-1'}}M </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  	</div>
+</p-dialog>
+<p-dialog [(visible)]="showProposedSpendDialog" [modal]="true" [style]="{width: '900px', maxWidth: '98vw'}" class="tw-modal-dialog" [baseZIndex]="9999" (onShow)="dialogOpened=true" (onHide)="dialogOpened=false">
+  <div class="breakdown-modal tw-modal">
+    <div class="tw-modal-header">
+      <h3>Proposed Spend Breakdown</h3>
+      <button (click)="showProposedSpendDialog=false" class="tw-modal-close">
+        <i class="pi pi-times"></i>
+      </button>
+    </div>
+    <div class="tw-modal-content">
+      <div class="tw-modal-stats-row">
+        <div class="tw-modal-stat">
+          <span class="tw-modal-stat-label">Total Proposed Spend</span>
+          <span class="tw-modal-stat-value">{{getProposedSpendTotal()}}</span>
+        </div>
+        <div class="tw-modal-stat">
+          <span class="tw-modal-stat-label">Top Vendor by Proposed Spend</span>
+          <span class="tw-modal-stat-value">{{getTopProposedVendorName()}}</span>
+        </div>
+        <div class="tw-modal-stat">
+          <span class="tw-modal-stat-label">Number of Vendors</span>
+          <span class="tw-modal-stat-value">{{getProposedVendorCount()}} Active Vendors</span>
+        </div>
+      </div>
+      <div class="tw-modal-charts-row">
+        <div class="tw-modal-chart tw-modal-chart-contribution">
+          <span class="tw-modal-chart-label">Spend Contribution</span>
+          <p-chart type="bar" [data]="proposedSpendChartData" [options]="barChartOptions" class="tw-modal-chart-bar"></p-chart>
+        </div>
+        <div class="tw-modal-chart tw-modal-chart-vendor">
+          <span class="tw-modal-chart-label">Spend by Vendor</span>
+          <div *ngFor="let ds of proposedSpendChartData.datasets" class="tw-modal-vendor-row">
+            <span class="tw-modal-vendor-dot" [ngStyle]="{'background': ds.backgroundColor}"></span>
+            <span class="tw-modal-vendor-name">{{ds.label}}</span>
+            <!-- <span class="tw-modal-vendor-percent">{{getProposedVendorPercent(ds)}}%</span> -->
+            <div class="tw-modal-vendor-bar-bg">
+              <div class="tw-modal-vendor-bar" [ngStyle]="{'width': getProposedVendorPercent(ds) + '%', 'background': ds.backgroundColor}"></div>
+            </div>
+            <span class="tw-modal-vendor-value">${{ds.data[0] | number:'1.1-1'}}M</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</p-dialog>
+
+<p-dialog [(visible)]="showSavingsDialog" [modal]="true" [style]="{width: '900px', maxWidth: '98vw'}" class="tw-modal-dialog" [baseZIndex]="9999" (onShow)="dialogOpened=true" (onHide)="dialogOpened=false">
+  <div class="breakdown-modal tw-modal">
+    <div class="tw-modal-header">
+      <h3>Estimated Savings Breakdown</h3>
+      <button (click)="showSavingsDialog=false" class="tw-modal-close">
+        <i class="pi pi-times"></i>
+      </button>
+    </div>
+    <div class="tw-modal-content">
+      <div class="tw-modal-stats-row">
+        <div class="tw-modal-stat">
+          <span class="tw-modal-stat-label">Total Estimated Savings</span>
+          <span class="tw-modal-stat-value">{{getSavingsTotal()}}</span>
+        </div>
+        <div class="tw-modal-stat">
+          <span class="tw-modal-stat-label">Top Vendor by Savings</span>
+          <span class="tw-modal-stat-value">{{getTopSavingsVendorName()}}</span>
+        </div>
+        <div class="tw-modal-stat">
+          <span class="tw-modal-stat-label">Number of Vendors</span>
+          <span class="tw-modal-stat-value">{{getSavingsVendorCount()}} Active Vendors</span>
+        </div>
+      </div>
+      <div class="tw-modal-charts-row">
+        <div class="tw-modal-chart tw-modal-chart-contribution">
+          <span class="tw-modal-chart-label">Savings Contribution</span>
+          <p-chart type="bar" [data]="savingsChartData" [options]="barChartOptions" class="tw-modal-chart-bar"></p-chart>
+        </div>
+        <div class="tw-modal-chart tw-modal-chart-vendor">
+          <span class="tw-modal-chart-label">Savings by Vendor</span>
+          <div *ngFor="let ds of savingsChartData.datasets" class="tw-modal-vendor-row">
+            <span class="tw-modal-vendor-dot" [ngStyle]="{'background': ds.backgroundColor}"></span>
+            <span class="tw-modal-vendor-name">{{ds.label}}</span>
+            <!-- <span class="tw-modal-vendor-percent">{{getSavingsVendorPercent(ds)}}%</span> -->
+            <div class="tw-modal-vendor-bar-bg">
+              <div class="tw-modal-vendor-bar" [ngStyle]="{'width': getSavingsVendorPercent(ds) + '%', 'background': ds.backgroundColor}"></div>
+            </div>
+            <span class="tw-modal-vendor-value">${{ds.data[0] | number:'1.1-1'}}M</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</p-dialog>
+
+<p-dialog [(visible)]="showVendorShareDialog" [modal]="true" [style]="{width: '900px', maxWidth: '98vw'}" class="tw-modal-dialog" [baseZIndex]="9999" (onShow)="dialogOpened=true" (onHide)="dialogOpened=false">
+  <div class="breakdown-modal tw-modal">
+    <div class="tw-modal-header">
+      <h3>Vendor Share Breakdown</h3>
+      <button (click)="showVendorShareDialog=false" class="tw-modal-close">
+        <i class="pi pi-times"></i>
+      </button>
+    </div>
+    <div class="tw-modal-content">
+      <div class="tw-modal-stats-row">
+        <div class="tw-modal-stat">
+          <span class="tw-modal-stat-label">Top Vendor Share</span>
+          <span class="tw-modal-stat-value">{{getTopVendorShareName()}}</span>
+        </div>
+        <div class="tw-modal-stat">
+          <span class="tw-modal-stat-label">Number of Vendors</span>
+          <span class="tw-modal-stat-value">{{getVendorShareCount()}} Active Vendors</span>
+        </div>
+      </div>
+      <div class="tw-modal-charts-row">
+        <div class="tw-modal-chart tw-modal-chart-contribution">
+          <span class="tw-modal-chart-label">Vendor Share</span>
+          <p-chart type="pie" [data]="vendorSharePieData" [options]="pieChartOptions" class="tw-modal-chart-bar"></p-chart>
+        </div>
+        <div class="tw-modal-chart tw-modal-chart-vendor">
+          <span class="tw-modal-chart-label">Share by Vendor</span>
+          <div *ngFor="let vendor of getVendorShareVendors()" class="tw-modal-vendor-row">
+            <span class="tw-modal-vendor-dot" [ngStyle]="{'background': vendor.color}"></span>
+            <span class="tw-modal-vendor-name">{{vendor.name}}</span>
+            <span class="tw-modal-vendor-percent"></span>
+            <div class="tw-modal-vendor-bar-bg">
+              <div class="tw-modal-vendor-bar" [ngStyle]="{'width': vendor.percent + '%', 'background': vendor.color}"></div>
+            </div>
+            <span class="tw-modal-vendor-value">{{vendor.percent}}%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</p-dialog>
 </div>
 <!-- my first test new commit  -->
 <!-- New Table: All Manufacturers: Items for Review -->
