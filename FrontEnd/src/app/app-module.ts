@@ -14,6 +14,7 @@ import { RippleModule } from 'primeng/ripple';
 import { TooltipModule } from 'primeng/tooltip';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { PanelModule } from 'primeng/panel';
+import { DialogModule } from 'primeng/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SelectModule } from 'primeng/select';
@@ -47,6 +48,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     DrawerModule,
     DrawerModule,
     InputTextModule,
+    DialogModule,
     MenubarModule,
     DividerModule,
     TagModule,
