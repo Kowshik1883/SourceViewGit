@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomePage } from './home-page/home-page';
 import { EnterPricing } from './enter-pricing/enter-pricing';
 import { Dashboard } from './dashboard/dashboard';
+import { ItemMatch } from './item-match/item-match';
 
 const routes: Routes = [
   {
@@ -18,8 +19,8 @@ const routes: Routes = [
     path: 'enter-pricing',
     component: EnterPricing
   },{
-  path: 'dashboard',
-  component: Dashboard
+  path: 'item-match',
+  component: ItemMatch
   }
 ];
 
