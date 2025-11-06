@@ -4,11 +4,12 @@ import { HomePage } from './home-page/home-page';
 import { EnterPricing } from './enter-pricing/enter-pricing';
 import { Dashboard } from './dashboard/dashboard';
 import { ItemMatch } from './item-match/item-match';
+import { SummaryDashboard } from './summary-dashboard/summary-dashboard';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'summary-dashboard',
     pathMatch: 'full'
   },
   {
@@ -21,6 +22,9 @@ const routes: Routes = [
   },{
   path: 'item-match',
   component: ItemMatch
+  },{
+    path: 'summary-dashboard',
+    component: SummaryDashboard
   }
 ];
 

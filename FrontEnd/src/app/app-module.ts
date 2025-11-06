@@ -27,6 +27,7 @@ import { EnterPricing } from './enter-pricing/enter-pricing';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { Dashboard } from './dashboard/dashboard';
 import { ItemMatch } from './item-match/item-match';
+import { SummaryDashboard } from './summary-dashboard/summary-dashboard';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ItemMatch } from './item-match/item-match';
     EnterPricing,
     SidebarComponent,
     Dashboard,
-    ItemMatch
+    ItemMatch,
+    SummaryDashboard
   ],
   imports: [
     CardModule,

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Spend &amp; Savings Analysis Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<style type="text/tailwindcss">
+      :root {
+        --sv-azure-50: #f0f8ff;
+        --sv-azure-100: #e0f2fe;
+        --sv-azure-200: #bae6fd;
+        --sv-azure-300: #7dd3fc;
+        --sv-azure-400: #38bdf8;
+        --sv-azure-500: #0ea5e9;
+        --sv-azure-600: #0284c7;
+        --sv-azure-700: #0369a1;
+        --sv-azure-800: #075985;
+        --sv-azure-900: #0c4a6e;
+        --sv-blue-50: #eff6ff;
+        --sv-blue-100: #dbeafe;
+        --sv-blue-200: #bfdbfe;
+        --sv-blue-300: #93c5fd;
+        --sv-blue-400: #60a5fa;
+        --sv-blue-500: #3b82f6;
+        --sv-blue-600: #2563eb;
+        --sv-blue-700: #1d4ed8;
+        --sv-blue-800: #1e40af;
+        --sv-blue-900: #1e3a8a;
+        --sv-slate-50: #f8fafc;
+        --sv-slate-100: #f1f5f9;
+        --sv-slate-200: #e2e8f0;
+        --sv-slate-300: #cbd5e1;
+        --sv-slate-400: #94a3b8;
+        --sv-slate-500: #64748b;
+        --sv-slate-600: #475569;
+        --sv-slate-700: #334155;
+        --sv-slate-800: #1e293b;
+        --sv-slate-900: #0f172a;
+        --sv-green-50: #f0fdf4;
+        --sv-green-100: #dcfce7;
+        --sv-green-500: #22c55e;
+        --sv-green-600: #16a34a;
+        --sv-green-700: #15803d;
+        --sv-red-50: #fef2f2;
+        --sv-red-100: #fee2e2;
+        --sv-red-500: #ef4444;
+        --sv-red-600: #dc2626;
+        --sv-red-700: #b91c1c;
+        --sv-surface: var(--sv-slate-50);
+        --sv-surface-muted: var(--sv-slate-100);
+        --sv-border: var(--sv-slate-200);
+        --sv-border-strong: var(--sv-slate-300);
+        --sv-text-strong: var(--sv-slate-800);
+        --sv-text: var(--sv-slate-600);
+        --sv-text-muted: var(--sv-slate-500);
+        --sv-primary: var(--sv-azure-600);
+        --sv-primary-light: var(--sv-azure-100);
+        --sv-primary-dark: var(--sv-azure-700);
+        --sv-tertiary: var(--sv-blue-600);
+        --sv-tertiary-light: var(--sv-blue-100);
+        --sv-positive: var(--sv-green-600);
+        --sv-negative: var(--sv-red-600);
+        --sv-glass-gradient: linear-gradient(120deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.3) 100%);
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+    </style>
+<script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              "sans": ["Roboto", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
+            boxShadow: {
+              'subtle': '0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05)',
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="font-sans bg-[var(--sv-surface)] text-[var(--sv-text)]">
+<div class="flex h-auto min-h-screen w-full items-center justify-center p-4 sm:p-6 md:p-8">
+<div class="w-full max-w-7xl rounded-xl bg-[var(--sv-surface-muted)] p-6 sm:p-8 shadow-subtle border border-[var(--sv-border)]">
+<div class="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--sv-border-strong)] pb-6 mb-6">
+<div class="flex flex-col gap-1">
+<h1 class="text-2xl font-bold tracking-tight text-[var(--sv-text-strong)]">Spend &amp; Savings Analysis</h1>
+<p class="text-sm text-[var(--sv-text-muted)]">An overview of proposed spend and savings across varying specialties.</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<label class="text-sm font-medium text-[var(--sv-text-muted)] whitespace-nowrap" for="company-selector">Proposing Company</label>
+<div class="relative">
+<select class="h-10 w-48 appearance-none rounded-md border border-[var(--sv-border-strong)] bg-white py-2 pl-3 pr-8 text-sm font-medium text-[var(--sv-text-strong)] focus:border-[var(--sv-blue-500)] focus:outline-none focus:ring-1 focus:ring-[var(--sv-blue-500)]" id="company-selector">
+<option>Company A</option>
+<option>Company B</option>
+<option>Company C</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-[var(--sv-text-muted)]">expand_more</span>
+</div>
+</div>
+<button class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-md bg-white text-[var(--sv-text-muted)] hover:bg-[var(--sv-blue-50)] hover:text-[var(--sv-blue-600)] border border-[var(--sv-border-strong)]">
+<span class="material-symbols-outlined text-xl">download</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="lg:col-span-2 flex flex-col gap-6">
+<div class="rounded-lg border border-[var(--sv-border)] bg-white p-6 shadow-subtle">
+<h2 class="text-lg font-semibold text-[var(--sv-text-strong)] mb-1">Spend Progression</h2>
+<p class="text-sm text-[var(--sv-text-muted)] mb-6">From Current Spend to Proposed Spend</p>
+<div class="flex h-64 w-full items-end justify-around gap-2 text-center text-xs font-medium text-[var(--sv-text-muted)]">
+<div class="flex h-full flex-col justify-end">
+<p class="mb-1.5 font-bold text-[var(--sv-text-strong)]">$4.0M</p>
+<div class="w-16 rounded-t bg-[var(--sv-blue-500)]" style="height: 100%;"></div>
+<p class="mt-2">Current Spend</p>
+</div>
+<div class="flex h-full flex-col justify-end">
+<p class="mb-1.5 font-bold text-[var(--sv-negative)]">-$400K</p>
+<div class="w-16 rounded-t bg-[var(--sv-negative)]" style="height: 10%;"></div>
+<p class="mt-2">Price Savings</p>
+</div>
+<div class="flex h-full flex-col justify-end">
+<p class="mb-1.5 font-bold text-[var(--sv-negative)]">-$400K</p>
+<div class="w-16 rounded-t bg-[var(--sv-negative)]" style="height: 10%;"></div>
+<p class="mt-2">Utilization Savings</p>
+</div>
+<div class="relative flex h-full flex-col items-center justify-end">
+<div class="absolute w-[calc(100%+8.5rem)] border-t-2 border-dashed border-[var(--sv-positive)]" style="bottom: calc(80% + 2rem);">
+<p class="absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap text-sm font-semibold text-[var(--sv-positive)]">Total Savings: $800,000</p>
+</div>
+<p class="mb-1.5 font-bold text-[var(--sv-text-strong)]">$3.2M</p>
+<div class="w-16 rounded-t bg-[var(--sv-positive)]" style="height: 80%;"></div>
+<p class="mt-2">Proposed Spend</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+<div class="relative min-w-[158px] flex-1 overflow-hidden rounded-lg border border-[var(--sv-border)] bg-[var(--sv-green-50)] p-4 shadow-subtle">
+<div class="absolute inset-0 bg-[var(--sv-glass-gradient)]"></div>
+<div class="relative z-10 flex flex-col gap-1">
+<p class="text-sm font-medium text-[var(--sv-green-700)]">Total Savings ($)</p>
+<p class="text-3xl font-bold tracking-tight text-[var(--sv-green-700)]">$800,000</p>
+<p class="text-lg font-semibold text-[var(--sv-green-600)]">20%</p>
+</div>
+</div>
+<div class="flex min-w-[158px] flex-1 flex-col gap-1 rounded-lg border border-[var(--sv-border)] bg-white p-4">
+<p class="text-sm font-medium text-[var(--sv-text-muted)]">Net Price</p>
+<p class="text-2xl font-bold tracking-tight text-[var(--sv-text-strong)]">$4.1M</p>
+<p class="text-base font-medium text-[var(--sv-negative)]">-5%</p>
+</div>
+<div class="flex min-w-[158px] flex-1 flex-col gap-1 rounded-lg border border-[var(--sv-border)] bg-white p-4">
+<p class="text-sm font-medium text-[var(--sv-text-muted)]">Instrument Spend</p>
+<p class="text-2xl font-bold tracking-tight text-[var(--sv-text-strong)]">$1.2M</p>
+<p class="text-base font-medium text-[var(--sv-text-muted)]">+2%</p>
+</div>
+<div class="flex min-w-[158px] flex-1 flex-col gap-1 rounded-lg border border-[var(--sv-border)] bg-white p-4">
+<p class="text-sm font-medium text-[var(--sv-text-muted)]">Aggregate Discount</p>
+<p class="text-2xl font-bold tracking-tight text-[var(--sv-blue-600)]">18.75%</p>
+<p class="text-base font-medium text-[var(--sv-text-muted)]">Company A</p>
+</div>
+</div>
+</div>
+<div class="lg:col-span-1 rounded-lg border border-[var(--sv-border)] p-6 flex flex-col bg-white">
+<h2 class="text-lg font-semibold text-[var(--sv-text-strong)] mb-4">Savings by Specialty</h2>
+<div class="flex-grow overflow-y-auto -mr-3 pr-3">
+<ul class="space-y-4">
+<li class="flex flex-col gap-2">
+<div class="flex justify-between items-baseline">
+<p class="font-medium text-sm text-[var(--sv-text-strong)]">Cardiology</p>
+<p class="font-semibold text-sm text-[var(--sv-positive)]">$250,000 (25%)</p>
+</div>
+<div class="w-full bg-[var(--sv-surface-muted)] rounded-full h-1.5"><div class="bg-[var(--sv-positive)] h-1.5 rounded-full" style="width: 25%"></div></div>
+</li>
+<li class="flex flex-col gap-2">
+<div class="flex justify-between items-baseline">
+<p class="font-medium text-sm text-[var(--sv-text-strong)]">Orthopedics</p>
+<p class="font-semibold text-sm text-[var(--sv-positive)]">$180,000 (18%)</p>
+</div>
+<div class="w-full bg-[var(--sv-surface-muted)] rounded-full h-1.5"><div class="bg-[var(--sv-positive)] h-1.5 rounded-full" style="width: 18%"></div></div>
+</li>
+<li class="flex flex-col gap-2">
+<div class="flex justify-between items-baseline">
+<p class="font-medium text-sm text-[var(--sv-text-strong)]">General Surgery</p>
+<p class="font-semibold text-sm text-[var(--sv-positive)]">$150,000 (22%)</p>
+</div>
+<div class="w-full bg-[var(--sv-surface-muted)] rounded-full h-1.5"><div class="bg-[var(--sv-positive)] h-1.5 rounded-full" style="width: 22%"></div></div>
+</li>
+<li class="flex flex-col gap-2">
+<div class="flex justify-between items-baseline">
+<p class="font-medium text-sm text-[var(--sv-text-strong)]">Neurology</p>
+<p class="font-semibold text-sm text-[var(--sv-positive)]">$120,000 (15%)</p>
+</div>
+<div class="w-full bg-[var(--sv-surface-muted)] rounded-full h-1.5"><div class="bg-[var(--sv-positive)] h-1.5 rounded-full" style="width: 15%"></div></div>
+</li>
+<li class="flex flex-col gap-2">
+<div class="flex justify-between items-baseline">
+<p class="font-medium text-sm text-[var(--sv-text-strong)]">Radiology</p>
+<p class="font-semibold text-sm text-[var(--sv-positive)]">$60,000 (12%)</p>
+</div>
+<div class="w-full bg-[var(--sv-surface-muted)] rounded-full h-1.5"><div class="bg-[var(--sv-positive)] h-1.5 rounded-full" style="width: 12%"></div></div>
+</li>
+<li class="flex flex-col gap-2">
+<div class="flex justify-between items-baseline">
+<p class="font-medium text-sm text-[var(--sv-text-strong)]">Oncology</p>
+<p class="font-semibold text-sm text-[var(--sv-positive)]">$40,000 (10%)</p>
+</div>
+<div class="w-full bg-[var(--sv-surface-muted)] rounded-full h-1.5"><div class="bg-[var(--sv-positive)] h-1.5 rounded-full" style="width: 10%"></div></div>
+</li>
+<li class="flex flex-col gap-2">
+<div class="flex justify-between items-baseline">
+<p class="font-medium text-sm text-[var(--sv-text-strong)]">Urology</p>
+<p class="font-semibold text-sm text-[var(--sv-positive)]">$35,000 (21%)</p>
+</div>
+<div class="w-full bg-[var(--sv-surface-muted)] rounded-full h-1.5"><div class="bg-[var(--sv-positive)] h-1.5 rounded-full" style="width: 21%"></div></div>
+</li>
+<li class="flex flex-col gap-2">
+<div class="flex justify-between items-baseline">
+<p class="font-medium text-sm text-[var(--sv-text-strong)]">Gynecology</p>
+<p class="font-semibold text-sm text-[var(--sv-positive)]">$25,000 (17%)</p>
+</div>
+<div class="w-full bg-[var(--sv-surface-muted)] rounded-full h-1.5"><div class="bg-[var(--sv-positive)] h-1.5 rounded-full" style="width: 17%"></div></div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

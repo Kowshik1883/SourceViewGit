@@ -1,0 +1,113 @@
+<div class="summary-shell">
+	<div class="summary-container">
+		<!-- Header / Filters -->
+		<div class="summary-header">
+			<div class="title-block">
+				<h1 class="app-title">Spend &amp; Savings Analysis</h1>
+				<p class="subtitle">An overview of proposed spend and savings across varying specialties.</p>
+			</div>
+			<div class="actions-block">
+				<div class="company-select">
+					<label for="company" class="field-label">Proposing Company</label>
+					<p-select inputId="company" [options]="companies" [(ngModel)]="selectedCompany" optionLabel="label" class="company-dropdown" styleClass="w-12rem"></p-select>
+				</div>
+				<button pButton type="button" icon="pi pi-download" class="p-button-rounded p-button-text export-btn" (click)="export()" pTooltip="Download Report" tooltipPosition="bottom"></button>
+			</div>
+		</div>
+
+		<div class="content-grid">
+			<!-- Left Main Column -->
+			<div class="main-col">
+				<!-- Spend Progression Card -->
+				<p-card class="panel-card progression-card">
+					<ng-template pTemplate="header">
+						<div class="card-header with-toggle">
+							<div class="card-header-left">
+								<h2>Spend Progression</h2>
+								<span class="hint">From Current Spend to Proposed Spend</span>
+							</div>
+							<button pButton type="button" (click)="toggleView()" class="toggle-view-btn p-button-sm p-button-rounded p-button-text" [label]="viewMode === 'chart' ? 'Table View' : 'Chart View'" [icon]="viewMode === 'chart' ? 'pi pi-table' : 'pi pi-chart-bar'"></button>
+						</div>
+					</ng-template>
+					<div *ngIf="viewMode === 'chart'" class="chart-wrapper">
+						<p-chart type="bar" [data]="spendChartData" [options]="spendChartOptions" style="height:270px"></p-chart>
+						<div class="total-savings" *ngIf="totalSavings">
+							<span>Total Savings: {{ totalSavings.amount | currency:'USD':'symbol':'1.0-0' }}</span>
+						</div>
+					</div>
+					<div *ngIf="viewMode === 'table'" class="progression-table-wrapper">
+						<p-table [value]="progressionData" class="progression-table" [tableStyle]="{'min-width':'100%'}">
+							<ng-template pTemplate="header">
+								<tr class="header-group">
+									<th rowspan="2">Platform</th>
+									<th colspan="2" class="group">CURRENT SPEND</th>
+									<th colspan="2" class="group">PROPOSED PRICING</th>
+									<th colspan="1" class="group">AGGREGATE PROPOSED ETH DISCOUNT {{aggregateDiscount}}%</th>
+								</tr>
+								<tr class="header-sub">
+									<th>Net Price <sup>1</sup></th>
+									<th>Instrument Spend <sup>2</sup></th>
+									<th>ETH No Equivalent <sup>3</sup></th>
+									<th>Proposed Spend ($)</th>
+									<th>Total Savings<sup>4</sup></th>
+									
+								</tr>
+							</ng-template>
+							<ng-template pTemplate="body" let-row>
+								<tr>
+									<td class="platform">{{row.platform}}</td>
+									<td>{{row.netPrice | currency:'USD':'symbol':'1.0-0'}}</td>
+									<td>{{row.instrumentSpend | currency:'USD':'symbol':'1.0-0'}}</td>
+									<td>{{row.noEquivalent | currency:'USD':'symbol':'1.0-0'}}</td>
+									<td>{{row.proposedSpend | currency:'USD':'symbol':'1.0-0'}}</td>
+									<td>{{row.totalSavingsAmount | currency:'USD':'symbol':'1.0-0'}} ({{row.totalSavingsPercent}}%)</td>
+									
+								</tr>
+							</ng-template>
+							<ng-template pTemplate="footer">
+								<tr class="total-row">
+									<td class="platform">Total</td>
+									<td>{{progressionTotals.netPrice | currency:'USD':'symbol':'1.0-0'}}</td>
+									<td>{{progressionTotals.instrumentSpend | currency:'USD':'symbol':'1.0-0'}}</td>
+									<td>{{progressionTotals.noEquivalent | currency:'USD':'symbol':'1.0-0'}}</td>
+									<td>{{progressionTotals.proposedSpend | currency:'USD':'symbol':'1.0-0'}}</td>
+									<td>{{progressionTotals.totalSavingsAmount | currency:'USD':'symbol':'1.0-0'}} ({{progressionTotals.totalSavingsPercent}}%)</td>
+
+								</tr>
+							</ng-template>
+						</p-table>
+					</div>
+				</p-card>
+
+				<!-- KPI Tiles -->
+				<div class="kpi-grid">
+					<p-card class="kpi primary" *ngFor="let k of kpis" [ngClass]="{'kpi-primary-savings': k.title.includes('Total Savings')}">
+						<div class="kpi-body">
+							<p class="kpi-title" [ngClass]="k.accentClass">{{k.title}}</p>
+							<p class="kpi-main" [ngClass]="k.accentClass">{{k.value}}</p>
+							<p class="kpi-sub" [ngClass]="k.deltaClass">{{k.delta}}</p>
+						</div>
+					</p-card>
+				</div>
+			</div>
+
+			<!-- Right Sidebar Column -->
+			<div class="side-col">
+				<p-card class="panel-card savings-by">
+					<ng-template pTemplate="header">
+						<h2>Savings by Specialty</h2>
+					</ng-template>
+					<div class="specialty-list">
+						<div class="specialty-item" *ngFor="let s of specialtySavings">
+							<div class="row-top">
+								<p class="spec-name">{{s.name}}</p>
+								<p class="spec-value" [ngClass]="{'positive': true}">{{s.amount | currency:'USD':'symbol':'1.0-0'}} ({{s.percent}}%)</p>
+							</div>
+							<p-progressBar [value]="s.percent" styleClass="spec-progress"></p-progressBar>
+						</div>
+					</div>
+				</p-card>
+			</div>
+		</div>
+	</div>
+</div>

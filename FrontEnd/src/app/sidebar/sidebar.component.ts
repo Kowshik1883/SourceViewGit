@@ -60,6 +60,7 @@ export class SidebarComponent {
     },
     {
       label: 'Insights',
+      route: '/summary-dashboard',
       icon: 'pi-chart-line',
       iconLibrary: 'pi'
     }
