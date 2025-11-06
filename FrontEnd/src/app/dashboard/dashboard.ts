@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './dashboard.scss',
 })
 export class Dashboard {
-  viewMode: 'dashboard' | 'validation' | 'match' = 'dashboard';
+  viewMode: 'dashboard' | 'validation' | 'match' | 'items' = 'dashboard';
 
   validationScore = 82; // percent value
   matchScore = 64; // percent value
@@ -55,7 +55,7 @@ export class Dashboard {
     { key: 'kitMultiSku', label: 'KIT or MULTI-SKU', count: 0, percent: 0 }
   ];
 
-  switchMode(mode: 'dashboard' | 'validation' | 'match') {
+  switchMode(mode: 'dashboard' | 'validation' | 'match' | 'items') {
     this.viewMode = mode;
   }
 }
