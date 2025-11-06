@@ -22,7 +22,7 @@
   border-radius: 20px;
   padding: 20px 40px 20px 20px; /* top right bottom left */
 }
-.summary-header { display:flex; flex-wrap:wrap; align-items:flex-start; justify-content:space-between; gap:1.5rem; padding:1.25rem 1.5rem; background:#fff; border:1px solid var(--sv-border, #d7e3f4); border-radius:1rem; box-shadow:0 4px 12px -2px rgba(15,23,42,.08); }
+.summary-header {  border: 1px solid #9e9e9e;display:flex; flex-wrap:wrap; align-items:flex-start; justify-content:space-between; gap:1.5rem; padding:1.25rem 1.5rem; background:#fff;  border-radius:1rem; box-shadow:0 4px 12px -2px rgba(15,23,42,.08); }
 .title-block { display:flex; flex-direction:column; gap:.35rem; }
 .app-title { margin:0; font-size:1.55rem; font-weight:700; letter-spacing:.5px; color: var(--sv-text-strong,#1a2a3a); }
 .subtitle { margin:0; font-size:.78rem; color: var(--sv-text-muted,#5c6b81); }
