@@ -2,15 +2,23 @@
     <div class="topbar">
         <div class="logo-title">
             <i class="pi pi-chart-line logo-icon"></i>
-            <h2>Data Analytics</h2>
+            <h2>Item Match Summary
+</h2>
         </div>
-        <div class="segmented-toggle">
-            <button pButton type="button" label="Dashboard" [class.active]="viewMode==='dashboard'" (click)="viewMode='dashboard'"></button>
-            <button pButton type="button" label="Item List" [class.active]="viewMode==='items'" (click)="viewMode='items'"></button>
+        <div class="segmented-toggle" role="radiogroup" aria-label="View Toggle">
+            <label class="segment" [class.active]="isDashboard">
+                <input type="radio" name="viewToggle" [checked]="isDashboard" (change)="goDashboard()" aria-label="Dashboard" />
+                <span>Dashboard</span>
+            </label>
+            <label class="segment" [class.active]="!isDashboard">
+                <input type="radio" name="viewToggle" [checked]="!isDashboard" (change)="goItems()" aria-label="Item List" />
+                <span>Item List</span>
+            </label>
         </div>
     </div>
 
-    <div class="content" *ngIf="viewMode==='dashboard'">
+    <div class="panel-container">
+        <div class="content panel dashboard-panel" [class.active]="isDashboard">
         <div class="card-grid">
             <!-- Data Validation Summary -->
             <p-card class="summary-card">
@@ -19,12 +27,12 @@
                         <div class="card-icon accent-blue">
                             <i class="pi pi-database"></i>
                         </div>
-                        <h3>Data Validation Summary</h3>
+                        <h3>Data Validation</h3>
                     </div>
                 </ng-template>
                 <div class="card-body">
                     <div class="radial-group">
-                        <div class="radial-progress" style="--value:100; --accent: var(--accent-blue);">
+                        <div class="radial-progress found">
                             <span class="radial-value">100%</span>
                             <span class="radial-label">Items Found</span>
                         </div>
@@ -35,11 +43,15 @@
                     </div>
                 </div>
                 <div class="divider"></div>
-                <div class="issue-list">
-                    <div class="issue-row" *ngFor="let m of correctionMetrics">
-                        <span class="issue-text">{{m.label}}</span>
-                        <span class="issue-text"><strong>{{m.count | number}}</strong> ({{m.percent}}%)</span>
-                        <button pButton type="button" label="View" class="p-button-text p-button-sm"></button>
+                <div class="metric-rows">
+                    <div class="metric-row" *ngFor="let m of correctionMetrics">
+                        <div class="metric-block accent-blue" [ngClass]="{ 'accent-green': m.percent >= 50 }">
+                            <div class="metric-count">{{m.count | number}}</div>
+                            <div class="metric-percent">{{m.percent}}%</div>
+                        </div>
+                        <div class="metric-label">{{m.label}}</div>
+                        <button type="button" class="view-link metric-action"><span class="view-text">View</span></button>
+                   
                     </div>
                 </div>
             </p-card>
@@ -51,39 +63,92 @@
                         <div class="card-icon accent-green">
                             <i class="pi pi-check-circle"></i>
                         </div>
-                        <h3>Match Metrics Summary</h3>
+                        <h3>Match Metrics</h3>
                     </div>
                 </ng-template>
                 <div class="card-body">
-                    <div class="radial-group">
-                        <div class="radial-progress" style="--value:100; --accent: var(--accent-green);">
-                            <span class="radial-value">100%</span>
-                            <span class="radial-label">Items Matched</span>
+                        <div class="radial-group">
+                            <div class="radial-progress matched">
+                                <span class="radial-value">100%</span>
+                                <span class="radial-label">Items Matched</span>
+                            </div>
+                            <div class="vertical-metrics">
+                                <div class="vm-item" *ngFor="let cat of matchCategoryMetrics" [ngClass]="{ 'high': cat.percent >= 50 }">
+                                    <div class="vm-count">{{cat.count | number}}</div>
+                                    <div class="vm-label">{{cat.label}}</div>
+                                    <div class="vm-percent">{{cat.percent}}%</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="metric-list">
-                            <p *ngFor="let cat of matchCategoryMetrics">{{cat.label}}:
-                                <span class="count-badge" [ngClass]="{ 'high': cat.percent >= 50, 'low': cat.percent < 10 }">{{cat.count | number}}</span>
-                                <span class="metric">({{cat.percent}}%)</span>
-                            </p>
-                        </div>
-                    </div>
                 </div>
                 <div class="divider"></div>
-                <div class="issue-list">
-                    <div class="issue-row" *ngFor="let p of platformMetrics">
-                        <span class="issue-text">{{p.label}}</span>
-                        <span class="issue-text"><strong>{{p.count | number}}</strong> ({{p.percent}}%)</span>
-                        <button pButton type="button" label="View" class="p-button-text p-button-sm"></button>
+                <div class="metric-rows">
+                    <div class="metric-row" *ngFor="let p of platformMetrics">
+                        <div class="metric-block accent-blue" [ngClass]="{ 'accent-green': p.percent >= 50 }">
+                            <div class="metric-count">{{p.count | number}}</div>
+                            <div class="metric-percent">{{p.percent}}%</div>
+                        </div>
+                        <div class="metric-label">{{p.label}}</div>
+                        <button type="button" class="view-link metric-action"><span class="view-text">View</span></button>
                     </div>
                 </div>
             </p-card>
         </div>
-    </div>
-
-    <div class="content" *ngIf="viewMode==='items'">
-        <p-card>
-            <h3>Item List (Placeholder)</h3>
-            <p>Implement item list view here.</p>
-        </p-card>
+        </div>
+        <div class="content panel items-panel" [class.active]="!isDashboard">
+            <div class="items-table-wrapper">
+                <p-table class="items-table" [value]="itemsData" [scrollable]="true" scrollHeight="520px" [paginator]="true" [rows]="25" [rowsPerPageOptions]="[25,50,100]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                    <ng-template pTemplate="header">
+                        <tr class="band-row">
+                            <th colspan="1" class="band band-customer">CUSTOMER PROVIDED</th>
+                            <th colspan="8" class="band band-db">DATABASE ACTUAL INFORMATION</th>
+                            <th colspan="4" class="band band-jj">JOHNSON &amp; JOHNSON MATCH</th>
+                            <th colspan="2" class="band band-price">CUSTOMER CURRENT PRICE</th>
+                            <th colspan="2" class="band band-proposal">J&amp;J MATCH PROPOSAL</th>
+                        </tr>
+                        <tr class="columns-row">
+                            <th pSortableColumn="customerQty">Customer Qty <p-sortIcon field="customerQty"></p-sortIcon></th>
+                            <th pSortableColumn="mfgName">MFG Name <p-sortIcon field="mfgName"></p-sortIcon></th>
+                            <th pSortableColumn="mfgItem">MFG Item # <p-sortIcon field="mfgItem"></p-sortIcon></th>
+                            <th pSortableColumn="itemDesc">Item Desc <p-sortIcon field="itemDesc"></p-sortIcon></th>
+                            <th pSortableColumn="actualUom">Actual UOM <p-sortIcon field="actualUom"></p-sortIcon></th>
+                            <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th>
+                            <th pSortableColumn="specialty">Specialty <p-sortIcon field="specialty"></p-sortIcon></th>
+                            <th pSortableColumn="platform">Platform <p-sortIcon field="platform"></p-sortIcon></th>
+                            <th pSortableColumn="segment">Segment <p-sortIcon field="segment"></p-sortIcon></th>
+                            <th pSortableColumn="jjItem">J&J Item # <p-sortIcon field="jjItem"></p-sortIcon></th>
+                            <th pSortableColumn="jjItemDesc">J&J Item Description <p-sortIcon field="jjItemDesc"></p-sortIcon></th>
+                            <th pSortableColumn="jjUom">J&J UOM <p-sortIcon field="jjUom"></p-sortIcon></th>
+                            <th pSortableColumn="jjProposedQty">Proposed Qty <p-sortIcon field="jjProposedQty"></p-sortIcon></th>
+                            <th pSortableColumn="net">Net <p-sortIcon field="net"></p-sortIcon></th>
+                            <th pSortableColumn="netTotal">Net Total <p-sortIcon field="netTotal"></p-sortIcon></th>
+                            <th pSortableColumn="jjNet">J&J Net <p-sortIcon field="jjNet"></p-sortIcon></th>
+                            <th pSortableColumn="jjNetTotal">J&J Net Total <p-sortIcon field="jjNetTotal"></p-sortIcon></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-row>
+                        <tr>
+                            <td>{{row.customerQty}}</td>
+                            <td><span >{{row.mfgName}}</span></td>
+                            <td><span >{{row.mfgItem}}</span></td>
+                            <td class="desc-col">{{row.itemDesc}}</td>
+                            <td>{{row.actualUom}}</td>
+                            <td>{{row.status}}</td>
+                            <td>{{row.specialty}}</td>
+                            <td>{{row.platform}}</td>
+                            <td>{{row.segment}}</td>
+                            <td>{{row.jjItem}}</td>
+                            <td class="desc-col">{{row.jjItemDesc}}</td>
+                            <td>{{row.jjUom}}</td>
+                            <td>{{row.jjProposedQty}}</td>
+                            <td>{{row.net | currency:'USD':'symbol':'1.2-2'}}</td>
+                            <td>{{row.netTotal | currency:'USD':'symbol':'1.2-2'}}</td>
+                            <td>{{row.jjNet | currency:'USD':'symbol':'1.2-2'}}</td>
+                            <td>{{row.jjNetTotal | currency:'USD':'symbol':'1.2-2'}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
     </div>
 </div>

@@ -7,7 +7,7 @@ import { Dashboard } from './dashboard/dashboard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'dashboard',
     pathMatch: 'full'
   },
   {

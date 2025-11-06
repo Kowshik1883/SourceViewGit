@@ -5,8 +5,9 @@
 // Learn more about theming and how to use it for your application's
 // custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
-@import "primeicons/primeicons.css";
-@import '../node_modules/primeicons/primeicons.css';
+/* PrimeNG core & theme imports (enable built-in p-table styles) */
+
+@import 'primeicons/primeicons.css';
 
 *, *::before, *::after {
   box-sizing: border-box;
