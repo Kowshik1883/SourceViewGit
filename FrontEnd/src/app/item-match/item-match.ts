@@ -5,7 +5,7 @@ import { trigger, transition, style, animate, query, group } from '@angular/anim
   selector: 'app-item-match',
   standalone: false,
   templateUrl: './item-match.html',
-  styleUrl: './item-match.scss',
+  styleUrls: ['./item-match.scss'],
     animations: [
     trigger('sectionAnim', [
       transition(':enter', [

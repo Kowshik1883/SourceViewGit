@@ -274,7 +274,7 @@
 .metric-row .view-link { margin-right:.55rem; }
 
 
-.items-table-wrapper {
+:host ::ng-deep .items-table-wrapper {
   /* Palette & tokens */
   --hdr-bg: #123a63;          /* column header background (navy) */
   --hdr-fg: #ffffff;          /* column header text */
@@ -394,6 +394,7 @@
     text-align: center;
     width: 72px;
   }
+
 
   /* ===== “Pill” chips for MFG columns ===== */
   .pill {
