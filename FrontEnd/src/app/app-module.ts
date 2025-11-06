@@ -26,6 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EnterPricing } from './enter-pricing/enter-pricing';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { Dashboard } from './dashboard/dashboard';
+import { ItemMatch } from './item-match/item-match';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { Dashboard } from './dashboard/dashboard';
     HomePage,
     EnterPricing,
     SidebarComponent,
-    Dashboard
+    Dashboard,
+    ItemMatch
   ],
   imports: [
     CardModule,
