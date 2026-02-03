@@ -1,0 +1,48 @@
+<app-sidebar (collapsedChange)="onSidebarCollapsed($event)"></app-sidebar>
+<div class="topbar">
+	<div class="sidebar-logo">
+		<img src="assets/image.png" alt="Logo" class="logo-image" height="50" width="180" />
+	</div>
+	<div class="topbar-left">
+		<span class="customer-label">Customer Name</span>
+		<span class="customer-value">{{ customerName }}</span>
+	</div>
+	<div class="topbar-center1">
+		<span class="facility-label">Facility</span>
+		<p-multiSelect
+			[options]="facilities"
+			[(ngModel)]="selectedFacilities"
+			optionLabel="label"
+			optionValue="value"
+			display="chip"
+			[filter]="true"
+			filterPlaceholder="Search facilities"
+			placeholder="Select facilities"
+            styleClass="filter-control filter-control--multi"
+            panelStyleClass="filter-panel filter-panel--multi"
+            [showToggleAll]="false"
+            emptyMessage="No facilities found">
+        </p-multiSelect>
+    </div>
+	<div class="topbar-center2">
+		<span class="view-label">Selected View</span>
+		<p-select
+			[options]="views"
+			[(ngModel)]="selectedView"
+			optionLabel="label"
+			optionValue="value"
+            placeholder="Select view"
+            showClear="true"
+            styleClass="filter-control filter-control--single"
+            panelStyleClass="filter-panel filter-panel--single">
+        </p-select>
+	</div>
+
+	<div class="topbar-right">
+		<button pButton icon="pi pi-question-circle" class="p-button-text p-button-rounded" style="font-size:1.3rem;" type="button" aria-label="Help"></button>
+		<div class="topbar-avatar">AB</div>
+	</div>
+</div>
+<div class="main-content" [ngClass]="{'is-collapsed': isSidebarCollapsed}">
+	<router-outlet></router-outlet>
+</div>

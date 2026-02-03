@@ -1,0 +1,72 @@
+<nav
+	class="custom-sidebar"
+	[class.is-collapsed]="shouldShowCollapsedState"
+	[class.is-hover-expanded]="isHoverExpanded">
+	<div class="sidebar-inner">
+		<ul class="sidebar-menu sidebar-menu--primary">
+			<li *ngFor="let item of primaryItems">
+				<ng-container *ngIf="item.route; else primaryAction">
+					<a
+						[routerLink]="item.route"
+						class="sidebar-link"
+						routerLinkActive="is-active"
+						[routerLinkActiveOptions]="item.routerLinkActiveOptions ?? { exact: false }">
+						<ng-container *ngTemplateOutlet="iconTemplate; context: { item: item }"></ng-container>
+						<span class="sidebar-label">{{ item.label }}</span>
+					</a>
+				</ng-container>
+				<ng-template #primaryAction>
+					<button
+						class="sidebar-link"
+						type="button">
+						<ng-container *ngTemplateOutlet="iconTemplate; context: { item: item }"></ng-container>
+						<span class="sidebar-label">{{ item.label }}</span>
+					</button>
+				</ng-template>
+			</li>
+		</ul>
+
+		<ng-container *ngFor="let section of sections">
+			<div class="sidebar-section">
+				<span class="sidebar-heading">{{ section.label }}</span>
+				<ul class="sidebar-menu">
+					<li *ngFor="let item of section.items">
+						<ng-container *ngIf="item.route; else sectionAction">
+							<a
+								[routerLink]="item.route"
+								class="sidebar-link"
+								routerLinkActive="is-active"
+								[routerLinkActiveOptions]="item.routerLinkActiveOptions ?? { exact: false }"
+								[ngClass]="{
+									'sidebar-subitem': item.isSubItem,
+									'is-active': item.isActive
+								}">
+								<span *ngIf="item.isSubItem" class="sidebar-dot" aria-hidden="true"></span>
+								<span class="sidebar-label">{{ item.label }}</span>
+							</a>
+						</ng-container>
+						<ng-template #sectionAction>
+							<button
+								class="sidebar-link"
+								type="button"
+								[ngClass]="{
+									'sidebar-subitem': item.isSubItem,
+									'is-active': item.isActive
+								}">
+								<span *ngIf="item.isSubItem" class="sidebar-dot" aria-hidden="true"></span>
+								<span class="sidebar-label">{{ item.label }}</span>
+							</button>
+						</ng-template>
+					</li>
+				</ul>
+			</div>
+		</ng-container>
+	</div>
+
+	<ng-template #iconTemplate let-item="item">
+		<ng-container [ngSwitch]="item.iconLibrary">
+			<mat-icon *ngSwitchCase="'mat'">{{ item.icon }}</mat-icon>
+			<i *ngSwitchDefault class="pi" [ngClass]="item.icon"></i>
+		</ng-container>
+	</ng-template>
+</nav>

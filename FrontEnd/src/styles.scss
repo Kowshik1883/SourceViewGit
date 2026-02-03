@@ -1,0 +1,127 @@
+
+// Include theming for Angular Material with `mat.theme()`.
+// This Sass mixin will define CSS variables that are used for styling Angular Material
+// components according to the Material 3 design spec.
+// Learn more about theming and how to use it for your application's
+// custom components at https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+/* PrimeNG core & theme imports (enable built-in p-table styles) */
+
+@import 'primeicons/primeicons.css';
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  @include mat.theme((
+    color: (
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}
+
+:root {
+  --sv-blue-900: #003366;
+  --sv-blue-800: #0d355e;
+  --sv-blue-700: #135ba1;
+  --sv-blue-600: #1976d2;
+  --sv-blue-500: #0090d7;
+  --sv-blue-400: #00B5E2;
+  --sv-blue-100: #e3f2fd;
+  --sv-blue-50: #eaf6fb;
+
+  --sv-surface: #ffffff;
+  --sv-surface-muted: #f4f7fb;
+  --sv-surface-elevated: rgba(255, 255, 255, 0.94);
+  --sv-border: #d7e3f4;
+  --sv-border-soft: rgba(19, 91, 161, 0.12);
+  --sv-border-strong: rgba(19, 91, 161, 0.18);
+  --sv-text-strong: #1a2a3a;
+  --sv-text-muted: #5c6b81;
+  --sv-text-soft: #7a8aa2;
+  --sv-shadow-base: 0 14px 32px rgba(15, 23, 42, 0.08);
+  --sv-shadow-hover: 0 20px 44px rgba(13, 53, 94, 0.16);
+  --sv-font-sans: 'Inter', 'Helvetica Neue', sans-serif;
+  --sv-glass-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(227, 240, 255, 0.9) 100%);
+  --sv-glass-tint: linear-gradient(135deg, rgba(227, 240, 255, 0.32) 0%, rgba(205, 228, 255, 0.32) 100%);
+  --sv-focus-ring: 0 0 0 3px rgba(25, 118, 210, 0.25);
+}
+
+body {
+  // Default the application to a light color theme. This can be changed to
+  // `dark` to enable the dark color theme, or to `light dark` to defer to the
+  // user's system settings.
+  color-scheme: light;
+
+  // Set a default background, font and text colors for the application using
+  // Angular Material's system-level CSS variables. Learn more about these
+  // variables at https://material.angular.dev/guide/system-variables
+  background-color: var(--sv-surface-muted);
+  color: var(--sv-text-strong);
+  font-family: var(--sv-font-sans, Roboto, "Helvetica Neue", sans-serif);
+
+  // Reset the user agent margin.
+  margin: 0;
+}
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: var(--sv-font-sans, Roboto, "Helvetica Neue", sans-serif); }
+
+/* Shared PrimeNG dropdown panel styling */
+ .filter-panel {
+  border-radius: 10px;
+  border: 1px solid rgba(13, 53, 94, 0.16);
+  background: linear-gradient(135deg, rgba(248, 252, 255, 0.98) 0%, rgba(230, 241, 255, 0.94) 100%);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 20px 40px rgba(13, 53, 94, 0.22);
+  padding: 6px 0;
+}
+
+.filter-panel .p-multiselect-items,
+.filter-panel .p-select-items,
+.filter-panel .p-multiselect-items-wrapper,
+.filter-panel .p-select-items-wrapper {
+  max-height: 260px;
+  overflow-y: auto;
+  background: transparent;
+  padding: 6px;
+}
+
+.filter-panel .p-multiselect-item,
+.filter-panel .p-select-option {
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.82rem;
+  color: var(--sv-text-strong, #1a2a3a);
+  font-weight: 500;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.filter-panel .p-multiselect-item.p-highlight,
+.filter-panel .p-select-option.p-selected,
+.filter-panel .p-multiselect-item:not(.p-disabled):hover,
+.filter-panel .p-select-option:not(.p-disabled):hover {
+  background: rgba(25, 118, 210, 0.14);
+  color: var(--sv-blue-700, #135ba1);
+}
+
+.filter-panel .p-multiselect-filter-container {
+  padding: 0 12px 8px;
+  background: transparent;
+}
+
+.filter-panel .p-multiselect-filter {
+  border-radius: 8px;
+  border: 1px solid rgba(19, 91, 161, 0.18);
+  background: rgba(248, 252, 255, 0.95);
+}
+
+.filter-panel .p-multiselect-header {
+  background: linear-gradient(135deg, rgba(240, 247, 255, 0.92) 0%, rgba(223, 236, 255, 0.9) 100%);
+  border-bottom: 1px solid rgba(13, 53, 94, 0.12);
+}
